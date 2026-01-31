@@ -1,0 +1,11 @@
+<footer class="px-3 sm:px-10 py-4 flex flex-col sm:flex-row items-center justify-between">
+
+  <span class="topbar-branding">
+    <img src="../../../../assets/images/logos/CRNK/CRNK 2 NBG.svg" alt="" class="app-logo h-5">
+  </span>
+
+    <span class="sm:mx-2 sm:mt-0 mt-4">
+      {{ getGreeting() }}, {{ user.firstName }} |
+      {{ today | date:'fullDate' }} – {{ now | date:'shortTime' }}92
+    </span>
+</footer>

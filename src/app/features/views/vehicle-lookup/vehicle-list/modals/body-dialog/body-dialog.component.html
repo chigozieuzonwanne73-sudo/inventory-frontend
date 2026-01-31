@@ -1,0 +1,69 @@
+<h2 mat-dialog-title><span class="px-2 pt-2" (click)="onReturn()"><button mat-icon-button aria-label="return">
+    <mat-icon>keyboard_backspace</mat-icon>
+  </button>
+</span>
+</h2>
+<mat-dialog-content class="mat-typography float-start">
+   <mat-checkbox
+   name="Automatic "
+   class="!pb-1 w-full lg:w-1/5">Sedan</mat-checkbox>
+
+   <mat-checkbox
+   name="Manual"
+  class="!pb-1 w-full lg:w-1/5">Coupe</mat-checkbox>
+
+   <mat-checkbox
+   name="CVT"
+  class="!pb-1 w-full lg:w-1/5">Hatchback</mat-checkbox>
+
+   <mat-checkbox
+   name="DVT"
+  class="!pb-1 w-full lg:w-1/5">Pickup</mat-checkbox>
+
+   <mat-checkbox
+   name="Automatic "
+  class="!pb-1 w-full lg:w-1/5">Off Road</mat-checkbox>
+
+   <mat-checkbox
+   name="Manual"
+  class="!pb-1 w-full lg:w-1/5">Sport</mat-checkbox>
+
+   <mat-checkbox
+   name="CVT"
+  class="!pb-1 w-full lg:w-1/5">Micro</mat-checkbox>
+
+   <mat-checkbox
+   name="DVT"
+  class="!pb-1 w-full lg:w-1/5">Van</mat-checkbox>
+
+   <mat-checkbox
+   name="DVT"
+  class="!pb-1 w-full lg:w-1/5">Convertible</mat-checkbox>
+
+   <mat-checkbox
+   name="CVT"
+  class="!pb-1 w-full lg:w-1/5">Crossover</mat-checkbox>
+
+   <mat-checkbox
+   name="DVT"
+  class="!pb-1 w-full lg:w-1/5">SUV</mat-checkbox>
+
+   <mat-checkbox
+   name="DVT"
+  class="!pb-1 w-full lg:w-1/5">Wagon</mat-checkbox>
+
+   <mat-checkbox
+   name="CVT"
+  class="!pb-1 w-full lg:w-1/5">Muscle</mat-checkbox>
+
+   <mat-checkbox
+   name="DVT"
+  class="!pb-1 w-full lg:w-1/5">Roadster</mat-checkbox>
+
+</mat-dialog-content>
+
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Reset</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Apply</button>
+</mat-dialog-actions>

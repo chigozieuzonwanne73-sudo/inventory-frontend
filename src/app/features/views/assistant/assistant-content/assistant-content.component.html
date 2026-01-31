@@ -1,0 +1,140 @@
+<mat-toolbar class="chat-toolbar bg-sidebar-bg" container-background-color="bg-sidebar-bg">
+    <!-- sidebar toggle button -->
+    <button 
+    mat-icon-button
+    [style.alignSelf]="'center'"
+    class="mr-4 rtl:ml-4" 
+    (click)="matSidenav.toggle()"><mat-icon>menu</mat-icon>
+    </button>
+    
+    <!-- Selected active user -->
+    <div class="active-chat-user flex items-center justify-start">
+
+    
+    </div>
+
+    <!-- Right side top menu -->
+    <span class="flex-grow"></span>
+    <button 
+    mat-icon-button
+    [style.alignSelf]="'center'"
+    class="mr-4 rtl:ml-4 align-top" 
+    (click)="activeContact=null"><mat-icon>add_comment</mat-icon>
+    </button>
+
+    <button 
+    [style.alignSelf]="'center'" 
+    mat-icon-button 
+    class="topbar-button-right hidden-on-open"
+    (click)="closeChatBox()">
+        <mat-icon>clear</mat-icon>
+    </button>
+</mat-toolbar>
+
+<div *ngIf="chatCollection && !chatService.collectionLoading && activeContact">
+    <!-- Main chat body -->
+    <div class="conversations-hold" [perfectScrollbar]>
+
+      <!-- single chat item -->
+      <div class="single-conversation flex flex-row" 
+        *ngFor="let chat of chatCollection?.chats"
+        [ngClass]="{sender: chat.contactId === activeContact.id, me: chat.contactId !== activeContact.id}"
+      >
+
+        <a 
+          *ngIf="chat.contactId !== activeContact.id" 
+          href="" 
+          class="toolbar-avatar"
+          [ngClass]="{online: user.status === 'online'}"
+        >
+          <img [src]="user?.avatar" [alt]="user?.name">
+          <span class="status-dot"></span>
+        </a>
+
+        <a 
+          *ngIf="chat.contactId === activeContact.id" 
+          href="" 
+          class="toolbar-avatar"
+          [ngClass]="{online: activeContact.status === 'online'}"
+        >
+          <img [src]="activeContact?.avatar" [alt]="activeContact?.name">
+          <span class="status-dot"></span>
+        </a>
+
+        <div>
+          <h5 *ngIf="chat.contactId === activeContact.id" class="chat-username text-secondary">{{activeContact?.name}}</h5>
+          <h5 *ngIf="chat.contactId !== activeContact.id" class="chat-username text-secondary">{{user?.name}}</h5>
+
+          <div class="conversation-msg">
+            {{chat.text}}
+          </div>
+          <p class="chat-date text-secondary">{{chat.time | relativeTime}}</p>
+        </div>
+      </div>
+
+    </div>
+    <mat-divider></mat-divider>
+
+    <!-- Input box and send button -->
+    <div class="chat-input-actions">
+      <form 
+        #msgForm="ngForm" 
+        class="inputForm w-full" 
+        (ngSubmit)="sendMessage($event)" 
+        (keydown.enter)="sendMessage($event)"
+      >
+        <mat-form-field class="full-width mr-4 rtl:ml-4">
+          <textarea
+          matInput
+          required
+          #msgInput
+          
+          placeholder="Type your message"
+          name="message"
+          class="inputText"
+          value=""></textarea>
+        </mat-form-field>
+        <div class="flex w-full justify-end">
+          <button mat-flat-button color="primary" type="submit"><mat-icon>send</mat-icon> Send</button>
+        </div>
+      </form>
+    </div>
+</div>
+
+<div class="chat-intro" *ngIf="chatService.collectionLoading">
+  <div class="chat-loader">
+    <div class="spinner">
+      <div class="double-bounce1 mat-bg-accent"></div>
+      <div class="double-bounce2 mat-bg-primary"></div>
+    </div>
+  </div>
+</div>
+
+<div class="" *ngIf="!activeContact?.id || chatService.collectionLoading" >
+  <mat-divider></mat-divider>
+  <div class="conversations-hold" ></div>
+
+    <!-- Input box and send button -->
+    <div class="chat-input-actions"  >
+      <form 
+        #msgForm="ngForm" 
+        class="inputForm w-full" 
+        (ngSubmit)="sendMessage($event)" 
+        (keydown.enter)="sendMessage($event)"
+      >
+        <mat-form-field class="full-width mr-4 rtl:ml-4">
+          <textarea
+          matInput
+          required
+          #msgInput
+          
+          placeholder="How can i help you?"
+          name="message"
+          class="inputText"
+          value=""></textarea>
+        </mat-form-field>
+        <div class="flex w-full justify-end">
+          <button mat-flat-button color="primary" type="submit"><mat-icon>send</mat-icon> Send</button>
+        </div>
+      </form>
+</div>

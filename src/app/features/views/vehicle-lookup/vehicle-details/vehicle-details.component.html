@@ -1,0 +1,138 @@
+<mat-tab-group>
+  <!--Basic Infomation Tab-->
+    <mat-tab label="Basic Information"> <div class="p-2">
+    
+      <div class="container">
+
+        <!-- car details -->
+        <mat-card class="invoice-details p-4">
+          <div class="flex">
+            <button mat-icon-button routerLink="/user/vehicle-lookup">
+              <mat-icon>arrow_back</mat-icon>
+            </button>
+            <span class="flex-grow"></span>
+      
+            <button mat-flat-button color="primary" class="ml-4 rtl:mr-4 rtl:ml-4 mr-4 rtl:ml-4"
+              (click)="showEditOption = !showEditOption">
+              Purchase Report
+            </button>
+          </div>
+          <div id="print-area">
+            <!-- order details -->
+            <div class="order-info flex justify-between">
+              <div>
+                <h4>2003 Honda Accord EX V-6</h4>
+                <p>VIN: <span class="font-semibold">1HGCM82633A004352</span></p>
+                <p># </p>
+              </div>
+              <div></div>
+            </div>
+
+            <div class="flex flex-wrap justify-between">
+              <p>Style / Body: <strong>Coupe 2D</strong></p>
+              <p>Engine: <strong>3.0L V6 FI Gasoline</strong></p>
+              <p>Country of Assembly:<strong> United States</strong></p>
+            </div>
+
+            <!-- end -->
+      
+            <mat-divider></mat-divider>
+      
+            <!-- Additional Information -->
+            <div class="billing-address flex justify-between">
+              <!-- seller -->
+              <div>
+                <h4>Additional Information</h4>
+              </div>
+      
+              <div>
+              </div>
+            </div>
+            
+              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-between">
+                <p>Mileage: <strong>35000</strong></p>
+                <p>Country of Origin: <strong>Japan</strong> </p>
+                <p>Port of Entry:<strong> Lagos</strong></p>
+                <p>Dashboard Warning Lights:<strong> ABS, Check Engine</strong></p>
+                <p>Interior Condition:<strong> Good</strong></p>
+                <p>Exterior Condition: <strong>Minor Scratches</strong></p>
+                <p>Chassis Condition: <strong>No Rust</strong></p>
+                <p>Accident History?: <strong>Yes</strong></p>
+                <p>Modification History?: <strong>Yes</strong></p>
+                <p>Dealer Email:<strong> example&#64;gmail.com</strong></p>
+                <p>Owner Email: <strong>example&#64;gmail.com</strong></p>
+                <p>Inspection Grade: <strong>A</strong></p>
+              </div>
+      
+          </div>
+        </mat-card>
+
+        <mat-card class="invoice-details p-4"> 
+          <p-skeleton width="20rem"  height="2rem" class="mb-2" />
+          <p-skeleton width="15rem"  class="mb-2" />
+          <br>
+          <p-skeleton class="mb-2"  height="2rem" />
+          <br>
+          <p-skeleton width="20rem"  height="2rem" class="mb-2" />
+          <p-skeleton class="mb-2"  height="2rem" />
+          <p-skeleton class="mb-2"  height="2rem" />
+          <p-skeleton class="mb-2"  height="2rem" />
+          <p-skeleton class="mb-2"  height="2rem" />
+        </mat-card>
+      
+      </div>
+
+    </div></mat-tab>
+
+     <!--Accident History Tab-->
+    <mat-tab label="Accident History"> 
+      <div class="container">
+        <mat-card class="p-4">
+          <div class="item-table mb-6">
+            <mat-table [dataSource]="accidentReportData" class="" #table>
+              <ng-container matColumnDef="Date of Accident">
+                <mat-header-cell *matHeaderCellDef> Date of Accident </mat-header-cell>
+                <mat-cell *matCellDef="let accident"> {{ accident['Date of Accident'] }} </mat-cell>
+              </ng-container>
+              
+              <ng-container matColumnDef="Location">
+                <mat-header-cell *matHeaderCellDef> Location </mat-header-cell>
+                <mat-cell *matCellDef="let accident"> {{ accident['Location'] }} </mat-cell>
+              </ng-container>
+              
+              <ng-container matColumnDef="Severity">
+                <mat-header-cell *matHeaderCellDef> Severity </mat-header-cell>
+                <mat-cell *matCellDef="let accident"> {{ accident['Severity'] }} </mat-cell>
+              </ng-container>
+              
+              <ng-container matColumnDef="Airbag Deployment">
+                <mat-header-cell *matHeaderCellDef> Airbag Deployment </mat-header-cell>
+                <mat-cell *matCellDef="let accident"> {{ accident['Airbag Deployment'] }} </mat-cell>
+              </ng-container>
+              
+              <ng-container matColumnDef="Structural Damage">
+                <mat-header-cell *matHeaderCellDef> Structural Damage </mat-header-cell>
+                <mat-cell *matCellDef="let accident"> {{ accident['Structural Damage'] }} </mat-cell>
+              </ng-container>
+              
+              <ng-container matColumnDef="Damage Type">
+                <mat-header-cell *matHeaderCellDef> Damage Type </mat-header-cell>
+                <mat-cell *matCellDef="let accident"> {{ accident['Damage Type'] }} </mat-cell>
+              </ng-container>
+              
+              <ng-container matColumnDef="Vehicle Towed">
+                <mat-header-cell *matHeaderCellDef> Vehicle Towed </mat-header-cell>
+                <mat-cell *matCellDef="let accident"> {{ accident['Vehicle Towed'] }} </mat-cell>
+              </ng-container>              
+    
+              <mat-header-row *matHeaderRowDef="itemTableColumn"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: itemTableColumn"></mat-row>
+            </mat-table>
+          </div>
+        </mat-card>
+      </div>
+       </mat-tab>
+
+     <!--Modification History Tab-->
+    <mat-tab label="Modification History"> Content 3 </mat-tab>
+  </mat-tab-group>

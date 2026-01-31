@@ -1,0 +1,13 @@
+<div class="sidebar-panel {{layoutConf?.sidebarColor}}">
+    <div id="scroll-area" [perfectScrollbar] class="navigation-hold flex flex-col !bg-sidebar-bg">
+        <div class="sidebar-hold">
+
+            <!-- App Logo -->
+            <!-- Sidebar user -->
+           
+            <!-- Navigation -->
+            <app-sidenav [items]="menuItems" [hasIconMenu]="hasIconTypeMenuItem"
+                [iconMenuTitle]="iconTypeMenuTitle" #sidenav></app-sidenav>
+        </div>
+    </div>
+</div>
