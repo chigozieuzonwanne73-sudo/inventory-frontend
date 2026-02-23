@@ -7,19 +7,25 @@ import { CommonModule } from '@angular/common';
 import { RoutePartsService } from './shared/services/route-parts.service';
 
 import { filter } from 'rxjs/operators';
-import { UILibIconService } from './shared/services/ui-lib-icon.service';
+
 import { ThemeService } from './shared/services/theme.service';
+import { MatRippleModule } from '@angular/material/core';
+import { RippleModule } from 'primeng/ripple';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
 
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, CommonModule, RouterModule],
+  imports: [RouterOutlet, CommonModule, RouterModule, MatRippleModule, ToastModule, RippleModule,],
+  providers: [MessageService],
+
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 
 export class AppComponent implements OnInit, AfterViewInit {
-  appTitle = 'CRNK Auto';
+  appTitle = 'Shop Africana';
   pageTitle = '';
 
   constructor(
@@ -27,10 +33,8 @@ export class AppComponent implements OnInit, AfterViewInit {
     private router: Router,
     private activeRoute: ActivatedRoute,
     private routePartsService: RoutePartsService,
-    private iconService: UILibIconService,
     private themeService: ThemeService
   ) {
-    iconService.init()
   }
 
   ngOnInit() {
@@ -49,9 +53,9 @@ export class AppComponent implements OnInit, AfterViewInit {
       }
       // Extract title from parts;
       this.pageTitle = routeParts
-                      .reverse()
-                      .map((part) => part.title )
-                      .reduce((partA, partI) => {return `${partA} > ${partI}`});
+        .reverse()
+        .map((part) => part.title)
+        .reduce((partA, partI) => { return `${partA} > ${partI}` });
       this.pageTitle += ` | ${this.appTitle}`;
       this.title.setTitle(this.pageTitle);
     });

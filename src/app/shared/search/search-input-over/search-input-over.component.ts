@@ -19,17 +19,17 @@ import { AutoFocusDirective } from "../../directives/auto-focus.directive";
 import { SharedDirectivesModule } from "../../directives/shared-directives.module";
 
 @Component({
-    selector: "egret-search-input-over",
-    templateUrl: "./search-input-over.component.html",
-    styleUrls: ["./search-input-over.component.scss"],
-    standalone: true,
-    imports: [
-      CommonModule,
-      ReactiveFormsModule,
-      MatButtonModule,
-      MatIconModule,
-      SharedDirectivesModule
-    ]
+  selector: "great-search-input-over",
+  templateUrl: "./search-input-over.component.html",
+  styleUrls: ["./search-input-over.component.scss"],
+  standalone: true,
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    MatButtonModule,
+    MatIconModule,
+    SharedDirectivesModule
+  ]
 })
 export class SearchInputOverComponent implements OnInit, OnDestroy {
   isOpen: boolean;
@@ -40,16 +40,16 @@ export class SearchInputOverComponent implements OnInit, OnDestroy {
   searchCtrl = new UntypedFormControl();
   searchCtrlSub: Subscription;
   constructor(
-      private searchService: SearchService,
-      private router: Router
-  ) {}
+    private searchService: SearchService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
     this.searchCtrl.valueChanges.pipe(debounceTime(200))
-    .subscribe(value => {
-      this.search.emit(value);
-      this.searchService.searchTerm.next(value);
-    });
+      .subscribe(value => {
+        this.search.emit(value);
+        this.searchService.searchTerm.next(value);
+      });
   }
 
   ngOnDestroy() {
@@ -58,8 +58,8 @@ export class SearchInputOverComponent implements OnInit, OnDestroy {
     }
   }
   navigateToResult() {
-    if(this.resultPage) {
-        this.router.navigateByUrl(this.resultPage);
+    if (this.resultPage) {
+      this.router.navigateByUrl(this.resultPage);
     }
   }
   open() {

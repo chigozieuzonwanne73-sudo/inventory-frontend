@@ -1,34 +1,25 @@
-import { Injectable } from "@angular/core";
-import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest } from "@angular/common/http";
-import { Observable } from "rxjs";
-import { JwtAuthService } from "../services/auth/jwt-auth.service";
+// Create file: src/app/shared/interceptors/token.interceptor.ts
+import { HttpInterceptorFn } from '@angular/common/http';
+import { inject } from '@angular/core';
+import { JwtAuthService } from '../services/auth/jwt-auth.service';
 
-@Injectable()
-export class TokenInterceptor implements HttpInterceptor {
+export const tokenInterceptor: HttpInterceptorFn = (req, next) => {
+  const jwtAuth = inject(JwtAuthService);
+  const token = jwtAuth.getJwtToken();
 
-  constructor(private jwtAuth: JwtAuthService) {}
+  // Skip adding token for login/public endpoints
+  const isPublicEndpoint = req.url.includes('/Login') ||
+    req.url.includes('/Register') ||
+    req.url.includes('/ForgotPassword');
 
-  intercept(
-    req: HttpRequest<any>,
-    next: HttpHandler
-  ): Observable<HttpEvent<any>> {
-    var token = this.jwtAuth.token || this.jwtAuth.getJwtToken();
-
-    var changedReq;
-
-    if (token) {
-
-      changedReq = req.clone({
-        setHeaders: {
-          Authorization: `Bearer ${token}`
-        },
-      });
-
-    } else {
-
-      changedReq = req;
-      
-    }
-    return next.handle(changedReq);
+  if (token && !isPublicEndpoint) {
+    // Clone the request and add authorization header
+    req = req.clone({
+      setHeaders: {
+        Authorization: `Bearer ${token}`
+      }
+    });
   }
-}
+
+  return next(req);
+};

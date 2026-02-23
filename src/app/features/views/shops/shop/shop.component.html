@@ -1,0 +1,110 @@
+<p-toast />
+<mat-dialog-content>
+    <div class="container">
+        <!-- Edit Invoice -->
+        <mat-card *ngIf="showEditOption" class="p-4">
+            <div class="flex">
+
+                <span class="flex-grow"></span>
+
+                <button mat-flat-button color="primary" class="ml-4 rtl:mr-4 rtl:ml-4 mr-4 rtl:ml-4"
+                    (click)="saveShopChanges()">
+                    Save
+                </button>
+                <button mat-flat-button color="accent" (click)="showEditOption = !showEditOption">
+                    Cancel
+                </button>
+            </div>
+
+            <form [formGroup]="editShop" (ngSubmit)="saveShopChanges()">
+
+
+                <!-- billing details -->
+                <div class="billing-address flex flex-wrap justify-between items-center">
+                    <!-- seller -->
+                    <div class="flex flex-col w-full">
+                        <h4 class="mb-5">Edit Shop Details</h4>
+                        <mat-form-field class="mb-5">
+                            <mat-label>Name</mat-label>
+                            <input formControlName="name" matInput required />
+                        </mat-form-field>
+                        <mat-form-field class="mb-5">
+                            <mat-label>Address</mat-label>
+                            <textarea formControlName="location" matInput required matTextareaAutosize></textarea>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </form>
+        </mat-card>
+        <!-- end of edit invoice -->
+        <!-- =================================================== -->
+
+        <!-- =================================================== -->
+        <!-- invoice details -->
+        <mat-card *ngIf="!showEditOption" class="invoice-details p-4">
+            <div class="flex">
+                <button mat-icon-button routerLink="/invoice/list">
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+                <span class="flex-grow"></span>
+                <button mat-flat-button color="accent" (click)="onEditAddress()">
+                    Edit
+                </button>
+            </div>
+            <div id="print-area">
+                <!-- order details -->
+                <div class="order-info flex justify-between">
+                    <div>
+                        <h4>{{shop?.name}}</h4>
+                        <p>{{shop?.location}}</p>
+                        <p>Employee Count: #{{ shop?.employeeCount }}</p>
+                    </div>
+                </div>
+                <!-- end of order details -->
+
+                <mat-divider></mat-divider>
+
+                <!-- item table -->
+                <div class="item-table mb-6">
+                    <mat-table [dataSource]="shop?.employees" class="" #table>
+                        <!-- Number Column -->
+                        <ng-container matColumnDef="{{ itemTableColumn[0] }}">
+                            <mat-header-cell *matHeaderCellDef> # </mat-header-cell>
+                            <mat-cell *matCellDef="let element; let i = index">
+                                {{ i + 1 }}
+                            </mat-cell>
+                        </ng-container>
+
+                        <!-- Item Name Column -->
+                        <ng-container matColumnDef="{{ itemTableColumn[1] }}">
+                            <mat-header-cell *matHeaderCellDef>
+                                {{ itemTableColumn[1] }}
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let employee"> {{ employee.firstName }} </mat-cell>
+                        </ng-container>
+
+                        <!-- Unit price Column -->
+                        <ng-container matColumnDef="{{ itemTableColumn[2] }}">
+                            <mat-header-cell *matHeaderCellDef>
+                                {{ itemTableColumn[2] }}
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let employee"> {{ employee.lastName }} </mat-cell>
+                        </ng-container>
+
+                        <!-- Unit Column -->
+                        <ng-container matColumnDef="{{ itemTableColumn[3] }}">
+                            <mat-header-cell *matHeaderCellDef>
+                                {{ itemTableColumn[3] }}
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let employee"> {{ employee.email }} </mat-cell>
+                        </ng-container>
+
+                        <mat-header-row *matHeaderRowDef="itemTableColumn"></mat-header-row>
+                        <mat-row *matRowDef="let row; columns: itemTableColumn"></mat-row>
+                    </mat-table>
+                </div>
+                <!-- end of table -->
+            </div>
+        </mat-card>
+    </div>
+</mat-dialog-content>

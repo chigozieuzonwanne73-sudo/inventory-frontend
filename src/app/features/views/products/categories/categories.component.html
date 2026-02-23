@@ -1,0 +1,107 @@
+<p-toast />
+
+<!-- <mat-progress-bar mode="determinate" class="absolute top-0 left-0 right-0 invisible"
+    [ngClass]="{'!visible': isLoading}"></mat-progress-bar> -->
+
+<div class="page-layout overflow-hidden pb-8">
+    <div class="header-bg bg-primary"></div>
+    <div class="content">
+        <div class="content-header flex flex-wrap justify-center items-center mb-4">
+            <div class="search-box flex items-center crnk-search-bar w-96">
+                <input class="bg-card" type="text" placeholder="Search by Name" #searchTerm
+                    (keyup.enter)="onSearch(searchTerm.value)" />
+                <button mat-icon-button class="hover:fg-divider" (click)="onSearch(searchTerm.value)">
+                    <mat-icon>search</mat-icon>
+                </button>
+            </div>
+        </div>
+
+        <div class="content-body">
+            <div class="flex justify-end">
+                <span class="flex-grow"></span>
+                <button mat-flat-button color="primary" class="ml-4 rtl:mr-4 rtl:ml-4 mr-4 rtl:ml-4"
+                    (click)="addCategory()">
+                    Add Category
+                </button>
+            </div>
+
+            <div class="">
+                <mat-card class="p-1 md:p-4 overflow-x-auto">
+                    <div class="item-table mb-6">
+                        <mat-table [dataSource]="categories" class="w-full" #table>
+                            <ng-container matColumnDef="Name">
+                                <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+                                <mat-cell *matCellDef="let category"> {{ category.name }} </mat-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="Description">
+                                <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
+                                <mat-cell *matCellDef="let category"> {{ category.description }} </mat-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="View">
+                                <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+                                <mat-cell *matCellDef="let category">
+                                    <button mat-icon-button color="primary" (click)="editCategory(category)">
+                                        <mat-icon>edit</mat-icon>
+                                    </button>
+                                </mat-cell>
+                            </ng-container>
+
+                            <mat-header-row *matHeaderRowDef="itemTableColumn"></mat-header-row>
+                            <mat-row *matRowDef="let row; columns: itemTableColumn"></mat-row>
+
+                            <div *matNoDataRow>
+                                <!-- Show "No data" message when not loading -->
+                                <tr class="mat-row" *ngIf="!isLoading && categories.length === 0">
+                                    <td class="mat-cell text-center w-screen p-2"
+                                        [attr.colspan]="itemTableColumn.length">
+                                        No categories available to display
+                                    </td>
+                                </tr>
+
+                                <!-- Show skeleton loaders when loading -->
+                                <ng-container *ngIf="isLoading">
+                                    <tr class="mat-row">
+                                        <td class="mat-cell text-center w-screen p-2"
+                                            [attr.colspan]="itemTableColumn.length">
+                                            <p-skeleton height="2rem" />
+                                        </td>
+                                    </tr>
+                                    <tr class="mat-row">
+                                        <td class="mat-cell text-center w-screen p-2"
+                                            [attr.colspan]="itemTableColumn.length">
+                                            <p-skeleton height="2rem" />
+                                        </td>
+                                    </tr>
+                                    <tr class="mat-row">
+                                        <td class="mat-cell text-center w-screen p-2"
+                                            [attr.colspan]="itemTableColumn.length">
+                                            <p-skeleton height="2rem" />
+                                        </td>
+                                    </tr>
+                                    <tr class="mat-row">
+                                        <td class="mat-cell text-center w-screen p-2"
+                                            [attr.colspan]="itemTableColumn.length">
+                                            <p-skeleton height="2rem" />
+                                        </td>
+                                    </tr>
+                                    <tr class="mat-row">
+                                        <td class="mat-cell text-center w-screen p-2"
+                                            [attr.colspan]="itemTableColumn.length">
+                                            <p-skeleton height="2rem" />
+                                        </td>
+                                    </tr>
+                                </ng-container>
+                            </div>
+                        </mat-table>
+                    </div>
+
+                    <mat-paginator [length]="totalRecords" [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 25, 50]"
+                        (page)="onPageChange($event)" aria-label="Select page of categories">
+                    </mat-paginator>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+</div>

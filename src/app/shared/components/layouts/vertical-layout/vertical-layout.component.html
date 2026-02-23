@@ -1,16 +1,12 @@
 <div class="app-admin-wrap">
   <!-- Main Container -->
-  <mat-sidenav-container 
-   
-    class="app-admin-container app-side-nav-container mat-drawer-transition"
+  <mat-sidenav-container class="app-admin-container app-side-nav-container mat-drawer-transition"
     [ngClass]="adminContainerClasses">
     <mat-sidenav-content>
       <!-- SIDEBAR -->
-      <app-sidebar-side
-        (mouseenter)="sidebarMouseenter($event)"
-        (mouseleave)="sidebarMouseleave($event)"
-      ></app-sidebar-side>
-      
+      <app-sidebar-side (mouseenter)="sidebarMouseenter($event)"
+        (mouseleave)="sidebarMouseleave($event)"></app-sidebar-side>
+
       <!-- App content -->
       <div class="main-content-wrap" id="main-content-wrap">
         <!-- Header for side navigation layout -->
@@ -26,15 +22,13 @@
             <router-outlet></router-outlet>
           </div>
           <span class="m-auto"></span>
-          <app-assistant></app-assistant>
           <app-footer></app-footer>
 
         </div>
       </div>
-      
+
       <!-- View overlay for mobile navigation -->
-      <div class="sidebar-backdrop"
-        [ngClass]="{'visible': layoutConf.sidebarStyle !== 'closed' && layoutConf.isMobile}"
+      <div class="sidebar-backdrop" [ngClass]="{'visible': layoutConf.sidebarStyle !== 'closed' && layoutConf.isMobile}"
         (click)="closeSidebar()">
       </div>
     </mat-sidenav-content>
@@ -45,6 +39,6 @@
         <app-notifications [notificPanel]="notificationPanel"></app-notifications>
       </div>
     </mat-sidenav>
-    <egret-notifications2></egret-notifications2>
+    <great-notifications2></great-notifications2>
   </mat-sidenav-container>
-</div> 
+</div>

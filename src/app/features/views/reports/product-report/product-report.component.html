@@ -1,0 +1,87 @@
+<div class="p-6">
+    <div class="flex justify-between items-center mb-6">
+        <h1 class="text-2xl font-bold text-gray-800">Product Performance Report</h1>
+    </div>
+
+    <!-- Filters -->
+    <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
+        <h2 class="text-lg font-semibold mb-4">Filters</h2>
+        <form [formGroup]="filterForm" class="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <div class="form-group">
+                <label for="dateFrom" class="block text-sm font-medium text-gray-700 mb-1">Date From</label>
+                <p-calendar formControlName="dateFrom" dateFormat="yy-mm-dd" placeholder="Select start date"
+                    [showIcon]="true" inputId="dateFrom">
+                </p-calendar>
+            </div>
+
+            <div class="form-group">
+                <label for="dateTo" class="block text-sm font-medium text-gray-700 mb-1">Date To</label>
+                <p-calendar formControlName="dateTo" dateFormat="yy-mm-dd" placeholder="Select end date"
+                    [showIcon]="true" inputId="dateTo">
+                </p-calendar>
+            </div>
+
+            <div class="form-group" *ngIf="!isCashier">
+                <label for="shopId" class="block text-sm font-medium text-gray-700 mb-1">Shop</label>
+                <p-dropdown formControlName="shopId" [options]="shops" optionLabel="name" optionValue="id"
+                    placeholder="All Shops" [showClear]="true">
+                </p-dropdown>
+            </div>
+
+            <div class="form-group">
+                <label for="limit" class="block text-sm font-medium text-gray-700 mb-1">Top Products</label>
+                <p-dropdown formControlName="limit"
+                    [options]="[{label: 'Top 10', value: 10}, {label: 'Top 20', value: 20}, {label: 'Top 50', value: 50}]"
+                    optionLabel="label" optionValue="value" placeholder="Select limit">
+                </p-dropdown>
+            </div>
+        </form>
+
+        <div class="mt-4">
+            <p-button label="Generate Report" icon="pi pi-search" (onClick)="onFilterChange()" [loading]="isLoading">
+            </p-button>
+        </div>
+    </div>
+
+    <!-- Report Data -->
+    <div class="bg-white rounded-lg shadow-sm p-6">
+        <div class="flex justify-between items-center mb-4">
+            <h2 class="text-lg font-semibold">Top Products</h2>
+            <button pButton type="button" label="Export" icon="pi pi-download" (click)="downloadTopProductsReport()"
+                [loading]="isGenerating" class="p-button-success">
+            </button>
+        </div>
+
+        <p-table [value]="products" [loading]="isLoading" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+            [rowsPerPageOptions]="[10, 25, 50]" responsiveLayout="scroll">
+
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Product Name</th>
+                    <th>Total Sold</th>
+                    <th>Total Revenue</th>
+                </tr>
+            </ng-template>
+
+            <ng-template pTemplate="body" let-product>
+                <tr>
+                    <td>{{ product.productName }}</td>
+                    <td>{{ product.totalSold }}</td>
+                    <td>{{ product.totalRevenue | currency:'GBP':'symbol':'1.2-2' }}</td>
+                </tr>
+            </ng-template>
+
+            <ng-template pTemplate="emptymessage">
+                <tr>
+                    <td colspan="3" class="text-center py-8">
+                        <div class="text-gray-500">
+                            <i class="pi pi-info-circle text-2xl mb-2"></i>
+                            <p>No product data available</p>
+                        </div>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</div>

@@ -64,7 +64,7 @@ export const exampleMaterialModules = [
   MatOptionModule,
   MatStepperModule,
   MatCardModule,
-  
+
   // Additional modules needed for examples
   MatSidenavModule,
   MatDatepickerModule,

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, AfterViewInit, ViewChild, ElementRef } from "@angular/core";
+import { Component, OnInit, OnDestroy, AfterViewInit, ViewChild } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { RouterModule } from "@angular/router";
 import { MatIconModule } from "@angular/material/icon";
@@ -6,7 +6,8 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatMenuModule } from "@angular/material/menu";
 import { NavigationService } from "../../../shared/services/navigation.service";
 import { ThemeService } from "../../services/theme.service";
-import { Subscription } from "rxjs";
+import { Subject } from "rxjs";
+import { takeUntil } from "rxjs/operators";
 import { TranslateModule } from "@ngx-translate/core";
 import { SidenavComponent } from "../sidenav/sidenav.component";
 import { ILayoutConf, LayoutService } from "../../services/layout.service";
@@ -14,51 +15,66 @@ import { JwtAuthService } from "../../services/auth/jwt-auth.service";
 import { PerfectScrollbarModule } from "../perfect-scrollbar/perfect-scrollbar.module";
 
 @Component({
-    selector: "app-sidebar-side",
-    templateUrl: "./sidebar-side.component.html",
-    standalone: true,
-    imports: [
-      CommonModule,
-      RouterModule,
-      MatIconModule,
-      MatButtonModule,
-      MatMenuModule,
-      TranslateModule,
-      SidenavComponent,
-      PerfectScrollbarModule
-    ]
+  selector: "app-sidebar-side",
+  templateUrl: "./sidebar-side.component.html",
+  standalone: true,
+  imports: [
+    CommonModule,
+    RouterModule,
+    MatIconModule,
+    MatButtonModule,
+    MatMenuModule,
+    TranslateModule,
+    SidenavComponent,
+    PerfectScrollbarModule
+  ]
 })
 export class SidebarSideComponent implements OnInit, OnDestroy, AfterViewInit {
   public menuItems: any[];
   public hasIconTypeMenuItem: boolean;
   public iconTypeMenuTitle: string;
-  private menuItemsSub: Subscription;
+  private unsubscribe$ = new Subject<void>();
   public layoutConf: ILayoutConf;
-  @ViewChild('sidenav') sidenav:any;
+  @ViewChild('sidenav') sidenav: any;
 
   constructor(
     private navService: NavigationService,
     public themeService: ThemeService,
     private layout: LayoutService,
     public jwtAuth: JwtAuthService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.iconTypeMenuTitle = this.navService.iconTypeMenuTitle;
-    this.menuItemsSub = this.navService.menuItems$.subscribe(menuItem => {
-      this.menuItems = menuItem;
-      //Checks item list has any icon type.
-      this.hasIconTypeMenuItem = !!this.menuItems.filter(
-        item => item.type === "icon"
-      ).length;
-    });
+
+    // Subscribe to menu items
+    this.navService.menuItems$
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(menuItem => {
+        this.menuItems = menuItem;
+        // Checks item list has any icon type
+        this.hasIconTypeMenuItem = !!this.menuItems.filter(
+          item => item.type === "icon"
+        ).length;
+      });
+
+    // Subscribe to user changes and update menu
+    this.jwtAuth.user$
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(user => {
+        if (user && user.role) {
+          this.navService.publishMenuByRole(user.role);
+        }
+      });
+
     this.layoutConf = this.layout.layoutConf;
   }
+
   ngAfterViewInit() {
     setTimeout(() => {
       const links = this.sidenav.sidenav.nativeElement.querySelectorAll('li[appdropdownlink]');
       [...links].forEach(link => {
-        if(link.querySelector('a.open')) {
+        if (link.querySelector('a.open')) {
           // Add open class
           link.classList.add('open');
           // Scroll into view if not in view
@@ -71,23 +87,21 @@ export class SidebarSideComponent implements OnInit, OnDestroy, AfterViewInit {
       })
     }, 50)
   }
+
   ngOnDestroy() {
-    if (this.menuItemsSub) {
-      this.menuItemsSub.unsubscribe();
-    }
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
+
   toggleCollapse() {
-    if (
-      this.layoutConf.sidebarCompactToggle
-    ) {
-        this.layout.publishLayoutChange({
+    if (this.layoutConf.sidebarCompactToggle) {
+      this.layout.publishLayoutChange({
         sidebarCompactToggle: false
       });
     } else {
-        this.layout.publishLayoutChange({
-            // sidebarStyle: "compact",
-            sidebarCompactToggle: true
-          });
+      this.layout.publishLayoutChange({
+        sidebarCompactToggle: true
+      });
     }
   }
 }

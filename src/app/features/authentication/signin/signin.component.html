@@ -1,20 +1,20 @@
-<mat-progress-bar mode="determinate" class="absolute top-0 left-0 right-0 invisible" [ngClass]="{'!visible': isLoading}"></mat-progress-bar>
+<mat-progress-bar mode="determinate" class="absolute top-0 left-0 right-0 invisible"
+  [ngClass]="{'!visible': isLoading}"></mat-progress-bar>
 
-<div class="flex min-h-screen bg-card relative overflow-hidden screen-bottom-left-gradient screen-bottom-right-gradient">
+<p-toast />
+<div
+  class="flex min-h-screen bg-card relative overflow-hidden screen-bottom-left-gradient screen-bottom-right-gradient">
   <!-- Container with gradient effects applied via SCSS -->
-  <div class="container flex min-h-screen mx-auto relative z-10" [@animate]="{value:'*',params:{y:'40px',opacity:'0',delay:'100ms', duration: '400ms'}}">
+  <div class="container flex min-h-screen mx-auto relative z-10"
+    [@animate]="{value:'*',params:{y:'40px',opacity:'0',delay:'100ms', duration: '400ms'}}">
 
     <!-- Left Column -->
     <div class="flex-1 flex flex-col items-center justify-center p-8">
-      <div class="flex items-center gap-2 mb-6">
-        <img src="../../../../assets/images/logos/CRNK/CRNK 2 NBG.svg" alt="CRNK" class="h-8">
-        <br>
-      </div>
       <p class="text-2xl justify-center p-2">Welcome back</p>
 
-      <div class="w-full max-w-md">        
+      <div class="w-full max-w-md">
         <p *ngIf="errorMsg" class="text-center mb-4 text-red-500"><small>{{errorMsg}}</small></p>
-        
+
         <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" class="">
           <div>
             <mat-form-field class="w-full">
@@ -28,39 +28,27 @@
           <div>
             <mat-form-field class="w-full">
               <mat-label>Password</mat-label>
-              <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password" placeholder="＊＊＊＊＊＊＊"
-               >
+              <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password"
+                placeholder="＊＊＊＊＊＊＊">
               <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" type="button">
                 <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
               </button>
               <mat-error *ngIf="signupForm.get('password')?.hasError('required')">Password is required</mat-error>
             </mat-form-field>
-            <p><a [routerLink]="'/auth/forgot-password'" class="text-primary text-center full-width">Forgot
-                password</a></p>
           </div>
 
-          <button mat-flat-button color="primary" type="submit" class="w-full py-2 my-4" [disabled]="signupForm.invalid">
+          <button mat-flat-button color="primary" type="submit" class="w-full py-2 my-4"
+            [disabled]="signupForm.invalid">
             Sign In
           </button>
 
-          <div class="text-center">
-            <span class="text-secondary">Don't have an account? </span>
-            <a routerLink="/auth/signup" class="text-blue-500 hover:text-blue-600">Sign up</a>
-          </div>
 
-          <crnk-divider text="OR" class="my-10"></crnk-divider>
 
-          <div class="flex flex-col gap-4">
-            <button mat-stroked-button type="button" class="w-full !bg-card py-2 flex justify-center items-center gap-2">
-              <mat-icon svgIcon="eg_google" aria-hidden="false"></mat-icon>
-              <span>Continue with Google</span>
-            </button>
-          </div>
 
         </form>
       </div>
     </div>
 
-    
+
   </div>
 </div>

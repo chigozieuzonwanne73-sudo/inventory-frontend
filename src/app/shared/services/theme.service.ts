@@ -20,13 +20,13 @@ export class ThemeService {
 
   // Initialize themes from the central configuration
   private themeConfig = generateThemeConfig();
-  
+
   // Available themes can be expanded by the app
   private availableThemes: ThemeConfig[] = Object.values(this.themeConfig);
-  
+
   // Theme state
   private activeThemeSubject = new BehaviorSubject<ThemeConfig>(this.themeConfig[THEME_IDS.NAVY_LIGHT]);
-  
+
   constructor(
     @Inject(DOCUMENT) private document: Document,
     rendererFactory: RendererFactory2,
@@ -37,31 +37,31 @@ export class ThemeService {
     this.bodyElement = document.body;
     this.setDefaultTheme(this.themeConfig[THEME_IDS.NAVY_LIGHT]);
   }
-  
+
   /**
    * Get all available themes
    */
   getAvailableThemes(): ThemeConfig[] {
     return [...this.availableThemes];
   }
-  
+
   /**
    * Get current active theme
    */
   getActiveTheme(): ThemeConfig {
     return this.activeThemeSubject.value;
   }
-  
+
   setDefaultTheme(theme: ThemeConfig): void {
     // if (this.layoutConf.matTheme !== lc.matTheme && lc.matTheme) {
-      let themeId: string = '';
-      try {
-        themeId = this.localStorageService.getItem(config.themeLocalStorageKey);
-      } catch (e) {
-        console.log('Error getting theme from local storage', e);
-      }
-      themeId = themeId || theme.id;
-      this.setActiveThemeById(themeId);
+    let themeId: string = '';
+    try {
+      themeId = this.localStorageService.getItem(config.themeLocalStorageKey);
+    } catch (e) {
+      console.log('Error getting theme from local storage', e);
+    }
+    themeId = themeId || theme.id;
+    this.setActiveThemeById(themeId);
     // }
   }
   /**
@@ -70,7 +70,7 @@ export class ThemeService {
   activeTheme$(): Observable<ThemeConfig> {
     return this.activeThemeSubject.asObservable();
   }
-  
+
   /**
    * Add a new theme to available themes
    */
@@ -83,7 +83,7 @@ export class ThemeService {
       this.availableThemes.push(theme);
     }
   }
-  
+
   /**
    * Set active theme by ID
    */
@@ -95,7 +95,7 @@ export class ThemeService {
     }
     return false;
   }
-  
+
   /**
    * Set active theme and apply it
    */
@@ -104,51 +104,51 @@ export class ThemeService {
     this.availableThemes.forEach(t => {
       this.renderer.removeClass(this.documentElement, t.id);
     });
-    
+
     // Add active theme class
     this.renderer.addClass(this.documentElement, theme.id);
-    
+
     // Add/remove dark theme class
     if (theme.mode === 'dark') {
-      this.renderer.addClass(this.documentElement, 'egret-navy-dark');
-      this.renderer.addClass(this.bodyElement, 'egret-navy-dark');
+      this.renderer.addClass(this.documentElement, 'great-navy-dark');
+      this.renderer.addClass(this.bodyElement, 'great-navy-dark');
     } else {
-      this.renderer.removeClass(this.documentElement, 'egret-navy-dark');
-      this.renderer.removeClass(this.bodyElement, 'egret-navy-dark');
+      this.renderer.removeClass(this.documentElement, 'great-navy-dark');
+      this.renderer.removeClass(this.bodyElement, 'great-navy-dark');
     }
-    
+
     // Save to localStorage
     try {
       localStorage.setItem(config.themeLocalStorageKey, theme.id);
     } catch (e) {
       console.warn('Error saving theme to localStorage:', e);
     }
-    
+
     // Update the subject
     this.activeThemeSubject.next(theme);
   }
-  
+
   /**
    * Create a custom theme
    */
   addCustomTheme(name: string, mode: ThemeMode = 'light'): ThemeConfig {
     // Generate a unique ID
     const id = `custom-${name.toLowerCase().replace(/\s+/g, '-')}-${mode}`;
-    
+
     // Create the theme object
     const customTheme: ThemeConfig = {
       id,
       name,
       mode
     };
-    
+
     // Add to available themes
     this.addTheme(customTheme);
-    
+
     // Return the new theme
     return customTheme;
   }
-  
+
   /**
    * Create a dark variant of a theme
    */
@@ -156,30 +156,30 @@ export class ThemeService {
     if (theme.mode === 'dark') {
       return theme; // Already a dark theme
     }
-    
+
     // Create dark variant
     const darkVariant: ThemeConfig = {
       id: `${theme.id}-dark`,
       name: `${theme.name} Dark`,
       mode: 'dark'
     };
-    
+
     // Add to available themes
     this.addTheme(darkVariant);
-    
+
     return darkVariant;
   }
-  
+
   /**
    * Set dark mode directly
    */
   setDarkMode(isDark: boolean): void {
     if (isDark) {
-      this.renderer.addClass(this.documentElement, 'egret-navy-dark');  
-      this.renderer.addClass(this.bodyElement, 'egret-navy-dark');
+      this.renderer.addClass(this.documentElement, 'great-navy-dark');
+      this.renderer.addClass(this.bodyElement, 'great-navy-dark');
     } else {
-      this.renderer.removeClass(this.documentElement, 'egret-navy-dark');
-      this.renderer.removeClass(this.bodyElement, 'egret-navy-dark');
+      this.renderer.removeClass(this.documentElement, 'great-navy-dark');
+      this.renderer.removeClass(this.bodyElement, 'great-navy-dark');
     }
   }
 }

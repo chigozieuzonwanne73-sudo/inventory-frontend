@@ -18,10 +18,10 @@
     </mat-card-title>
     <mat-card-content *ngIf="viewMode === 'json'" class="h-[calc(100vh-90px)]">
       <!-- <pre class="text-muted">{{this.layoutConf | json}}</pre> -->
-      <pre><code [egretHighlight]="this.layoutConf | json"></code></pre>
+      <pre><code [greatHighlight]="this.layoutConf | json"></code></pre>
       <div class="flex">
         <span class="flex-grow"></span>
-        <a href="http://demos.ui-lib.com/egret-doc/#layout" target="_blank" mat-mini-fab><mat-icon>help</mat-icon></a>
+        <a href="http://demos.ui-lib.com/great-doc/#layout" target="_blank" mat-mini-fab><mat-icon>help</mat-icon></a>
       </div>
     </mat-card-content>
 
@@ -57,7 +57,7 @@
         <h6 class="title text-secondary">Material Themes</h6>
         <div class="colors grid grid-cols-2 gap-4">
           <div
-            class="color flex flex-col items-center {{theme.id === 'egret-navy' ? 'bg-white text-black' : 'bg-black text-white'}}"
+            class="color flex flex-col items-center {{theme.id === 'great-navy' ? 'bg-white text-black' : 'bg-black text-white'}}"
             *ngFor="let theme of themes" (click)="changeTheme(theme)" [style.background]="theme.primaryColor">
             <div class="flex flex-col items-center flex-grow justify-center h-full">
               <!-- <mat-icon class="active-icon" *ngIf="isThemeActive(theme)">check</mat-icon> -->

@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "CRNK-Auto": {
+    "shopana-inventory-frontend": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -95,10 +95,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "CRNK-Auto:build:production"
+              "buildTarget": "shopana-inventory-frontend:build:production"
             },
             "development": {
-              "buildTarget": "CRNK-Auto:build:development"
+              "buildTarget": "shopana-inventory-frontend:build:development"
             }
           },
           "defaultConfiguration": "development"

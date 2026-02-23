@@ -1,0 +1,47 @@
+<p-toast />
+
+<mat-card class="p-0">
+    <mat-card-title class="">
+        <div class="card-title-text pl-4 rtl:pr-4 py-3">Add New Shop</div>
+    </mat-card-title>
+    <mat-divider></mat-divider>
+    <mat-card-content class="!pt-4">
+        <form [formGroup]="addShopForm" (ngSubmit)="onSubmit()">
+            <div class="flex flex-wrap">
+                <div class="w-full md:pr-6">
+                    <div class="!pb-4 w-2/3">
+                        <mat-form-field class="full-width">
+                            <mat-label>Shop Name</mat-label>
+                            <input matInput name="name" formControlName="name">
+                            <mat-error *ngIf="addShopForm.controls['name'].hasError('required')">
+                                Shop name is required
+                            </mat-error>
+                            <mat-error *ngIf="addShopForm.controls['name'].hasError('minlength')">
+                                Shop name must be at least
+                                {{addShopForm.controls['name'].errors?.['minlength']?.requiredLength}} characters
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="!pb-4 w-2/3">
+                        <mat-form-field class="full-width">
+                            <mat-label>Location</mat-label>
+                            <textarea matInput name="location" formControlName="location"
+                                matTextareaAutosize></textarea>
+                            <mat-error *ngIf="addShopForm.controls['location'].hasError('required')">
+                                Location is required
+                            </mat-error>
+                            <mat-error *ngIf="addShopForm.controls['location'].hasError('minlength')">
+                                Location must be at least
+                                {{addShopForm.controls['location'].errors?.['minlength']?.requiredLength}} characters
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+            <button mat-raised-button color="primary" type="submit" [disabled]="addShopForm.invalid || isLoading">
+                {{ isLoading ? 'Saving...' : 'Submit' }}
+            </button>
+        </form>
+    </mat-card-content>
+</mat-card>

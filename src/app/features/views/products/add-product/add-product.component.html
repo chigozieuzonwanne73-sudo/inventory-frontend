@@ -1,0 +1,92 @@
+<mat-card class="p-0">
+    <mat-card-title class="">
+        <div class="card-title-text pl-4 rtl:pr-4 py-3">Form validation</div>
+    </mat-card-title>
+    <mat-divider></mat-divider>
+    <mat-card-content class="!pt-4 min-h-[calc(100vh-200px)]">
+        <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+            <div class="flex flex-wrap">
+                <div class="w-full md:w-1/2 md:pr-6">
+                    <div class="!pb-4">
+                        <mat-form-field class="full-width">
+                            <input matInput name="name" formControlName="name" placeholder="Name" value="">
+                        </mat-form-field>
+                        <small
+                            *ngIf="productForm.controls['name'].hasError('minlength') && productForm.controls['name'].touched"
+                            class="form-error-msg"> Name require at least
+                            {{productForm.controls['name'].errors['minlength'].requiredLength}} characters </small>
+                        <small
+                            *ngIf="productForm.controls['name'].hasError('maxlength') && productForm.controls['name'].touched"
+                            class="form-error-msg"> Name can not contain more than
+                            {{productForm.controls['name'].hasError['minlength'].requiredLength}} characters
+                        </small>
+                    </div>
+
+                    <div class="!pb-4">
+                        <mat-form-field class="full-width">
+                            <input matInput name="description" formControlName="description" placeholder="Description"
+                                value="">
+                        </mat-form-field>
+                        <small
+                            *ngIf="productForm.controls['description'].hasError('required') && productForm.controls['description'].touched"
+                            class="form-error-msg"> Description is required </small>
+                    </div>
+                    <div class="!pb-4">
+                        <mat-form-field class="full-width">
+                            <input matInput name="productNumber" formControlName="productNumber"
+                                placeholder="productNumber" value="">
+                        </mat-form-field>
+                        <small
+                            *ngIf="productForm.controls['productNumber'].hasError('required') && productForm.controls['productNumber'].touched"
+                            class="form-error-msg"> Product Number is required </small>
+                    </div>
+                </div>
+
+                <div class="w-full md:w-1/2">
+
+                    <div class="!pb-4">
+                        <mat-form-field class="full-width">
+                            <input type="text" name="price" matInput formControlName="price" placeholder="Price"
+                                value="">
+                        </mat-form-field>
+                        <small
+                            *ngIf="productForm.controls['price'].hasError('required') && productForm.controls['price'].touched"
+                            class="form-error-msg"> Price is required </small>
+                    </div>
+
+                    <div class="!pb-4">
+                        <mat-form-field class="full-width">
+                            <input type="text" name="stockQuantity" matInput formControlName="stockQuantity"
+                                placeholder="Stock Quantity" value="">
+                        </mat-form-field>
+                        <small
+                            *ngIf="productForm.controls['stockQuantity'].hasError('required') && productForm.controls['stockQuantity'].touched"
+                            class="form-error-msg"> Stock Quantity is required </small>
+                    </div>
+
+                    <div class="!pb-4">
+                        <p-dropdown [options]="categories" class="w-full" optionLabel="name" optionValue="id"
+                            [filter]="true" filterBy="name" [showClear]="true" placeholder="Select a Category"
+                            formControlName="categoryId">
+                            <ng-template pTemplate="selectedItem" let-selectedOption>
+                                <div class="flex align-items-center gap-2">
+                                    <div>{{ selectedOption.name }}</div>
+                                </div>
+                            </ng-template>
+                            <ng-template let-category pTemplate="item">
+                                <div class="flex align-items-center gap-2">
+                                    <div>{{ category.name }}</div>
+                                </div>
+                            </ng-template>
+                        </p-dropdown>
+                        <small
+                            *ngIf="productForm.controls['categoryId'].hasError('required') && productForm.controls['categoryId'].touched"
+                            class="form-error-msg"> Category is required </small>
+                    </div>
+
+                </div>
+            </div>
+            <button mat-raised-button color="primary" [disabled]="productForm.invalid">Submit</button>
+        </form>
+    </mat-card-content>
+</mat-card>

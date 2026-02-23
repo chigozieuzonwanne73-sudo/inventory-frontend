@@ -1,0 +1,107 @@
+<p-toast />
+
+<mat-card class="p-0">
+    <mat-card-title class="">
+        <div class="card-title-text pl-4 rtl:pr-4 py-3">Add New User</div>
+    </mat-card-title>
+    <mat-divider></mat-divider>
+    <mat-card-content class="!pt-4">
+        <form [formGroup]="addUserForm" (ngSubmit)="onSubmit()">
+            <div class="flex flex-wrap">
+                <div class="w-full md:w-1/2 md:pr-6">
+                    <div class="!pb-4">
+                        <mat-form-field class="full-width">
+                            <mat-label>First Name</mat-label>
+                            <input matInput formControlName="firstName">
+                            <mat-error *ngIf="addUserForm.controls['firstName'].hasError('required')">
+                                First name is required
+                            </mat-error>
+                            <mat-error *ngIf="addUserForm.controls['firstName'].hasError('minlength')">
+                                First name must be at least
+                                {{addUserForm.controls['firstName'].errors?.['minlength']?.requiredLength}} characters
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="!pb-4">
+                        <mat-form-field class="full-width">
+                            <mat-label>Last Name</mat-label>
+                            <input matInput formControlName="lastName">
+                            <mat-error *ngIf="addUserForm.controls['lastName'].hasError('required')">
+                                Last name is required
+                            </mat-error>
+                            <mat-error *ngIf="addUserForm.controls['lastName'].hasError('minlength')">
+                                Last name must be at least
+                                {{addUserForm.controls['lastName'].errors?.['minlength']?.requiredLength}} characters
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="!pb-4">
+                        <mat-form-field class="full-width">
+                            <mat-label>Email</mat-label>
+                            <input matInput type="email" formControlName="email">
+                            <mat-error *ngIf="addUserForm.controls['email'].hasError('required')">
+                                Email is required
+                            </mat-error>
+                            <mat-error *ngIf="addUserForm.controls['email'].hasError('email')">
+                                Please enter a valid email
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="w-full md:w-1/2">
+                    <div class="!pb-4">
+                        <p-dropdown [options]="shops" [(ngModel)]="selectedShop" [ngModelOptions]="{standalone: true}"
+                            (onChange)="onShopChange($event)" optionLabel="name" [filter]="true" filterBy="name"
+                            [showClear]="true" placeholder="Select a Shop" styleClass="w-full">
+                            <ng-template pTemplate="selectedItem" let-selectedOption>
+                                <div class="flex align-items-center gap-2" *ngIf="selectedOption">
+                                    <div>{{ selectedOption.name }}</div>
+                                </div>
+                            </ng-template>
+                            <ng-template let-shop pTemplate="item">
+                                <div class="flex align-items-center gap-2">
+                                    <div>
+                                        <div class="font-medium">{{ shop.name }}</div>
+                                        <div class="text-sm text-gray-500">{{ shop.location }}</div>
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </p-dropdown>
+                        <small
+                            *ngIf="addUserForm.controls['shopId'].hasError('required') && addUserForm.controls['shopId'].touched"
+                            class="form-error-msg text-red-500">
+                            Shop is required
+                        </small>
+                    </div>
+
+                    <div class="!pb-4">
+                        <mat-form-field class="full-width">
+                            <mat-label>Password</mat-label>
+                            <input matInput type="password" formControlName="password">
+                            <mat-error *ngIf="addUserForm.controls['password'].hasError('required')">
+                                Password is required
+                            </mat-error>
+                            <mat-error *ngIf="addUserForm.controls['password'].hasError('minlength')">
+                                Password must be at least
+                                {{addUserForm.controls['password'].errors?.['minlength']?.requiredLength}} characters
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+            <div class="flex justify-between">
+                <button mat-raised-button color="primary" type="submit" [disabled]="addUserForm.invalid || isLoading">
+                    {{ isLoading ? 'Saving...' : 'Submit' }}
+                </button>
+
+                <button mat-raised-button color="primary" type="button" (click)="onAddCashier()" [disabled]="isLoading">
+                    {{ isLoading ? 'Saving...' : 'Register Cashier' }}
+                </button>
+            </div>
+
+        </form>
+    </mat-card-content>
+</mat-card>

@@ -11,10 +11,9 @@ import { FooterComponent } from '../../footer/footer.component';
 import { HeaderSideComponent } from '../../header-side/header-side.component';
 import { SidebarSideComponent } from '../../sidebar-side/sidebar-side.component';
 import { NotificationsComponent } from '../../notifications/notifications.component';
-import { EgretNotifications2Component } from '../../egret-notifications2/egret-notifications2.component';
+import { greatNotifications2Component } from '../../egret-notifications2/egret-notifications2.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { PerfectScrollbarModule } from '../../../components/perfect-scrollbar';
-import { AssistantComponent } from '../../../../features/views/assistant/assistant.component';
 
 @Component({
   selector: 'app-vertical-layout',
@@ -26,9 +25,8 @@ import { AssistantComponent } from '../../../../features/views/assistant/assista
     FooterComponent,
     HeaderSideComponent,
     SidebarSideComponent,
-    AssistantComponent,
     NotificationsComponent,
-    EgretNotifications2Component,
+    greatNotifications2Component,
     MatSidenavModule,
     PerfectScrollbarModule
   ]
@@ -42,7 +40,7 @@ export class VerticalLayoutComponent implements OnInit, OnDestroy, AfterViewInit
   }
   public layoutConf: ILayoutConf = {};
   public adminContainerClasses: any = {};
-  
+
   constructor(
     private router: Router,
     public translate: TranslateService,
@@ -53,10 +51,10 @@ export class VerticalLayoutComponent implements OnInit, OnDestroy, AfterViewInit
   ) {
     // Close sidenav after route change in mobile
     this.routerEventSub = router.events.pipe(filter(event => event instanceof NavigationEnd))
-    .subscribe((routeChange: NavigationEnd) => {
-      this.layout.adjustLayout({ route: routeChange.url });
-      this.scrollToTop();
-    });
+      .subscribe((routeChange: NavigationEnd) => {
+        this.layout.adjustLayout({ route: routeChange.url });
+        this.scrollToTop();
+      });
   }
 
   ngOnInit() {
@@ -71,14 +69,14 @@ export class VerticalLayoutComponent implements OnInit, OnDestroy, AfterViewInit
   onResize(event) {
     this.layout.adjustLayout(event);
   }
-  
-  ngAfterViewInit() {}
-  
+
+  ngAfterViewInit() { }
+
   scrollToTop() {
-    if(document) {
+    if (document) {
       setTimeout(() => {
         let element;
-        if(this.layoutConf.topbarFixed) {
+        if (this.layoutConf.topbarFixed) {
           element = <HTMLElement>document.querySelector('#rightside-content-hold');
         } else {
           element = <HTMLElement>document.querySelector('#main-content-wrap');
@@ -89,13 +87,13 @@ export class VerticalLayoutComponent implements OnInit, OnDestroy, AfterViewInit
   }
 
   ngOnDestroy() {
-    if(this.moduleLoaderSub) {
+    if (this.moduleLoaderSub) {
       this.moduleLoaderSub.unsubscribe();
     }
-    if(this.layoutConfSub) {
+    if (this.layoutConfSub) {
       this.layoutConfSub.unsubscribe();
     }
-    if(this.routerEventSub) {
+    if (this.routerEventSub) {
       this.routerEventSub.unsubscribe();
     }
   }
@@ -107,7 +105,7 @@ export class VerticalLayoutComponent implements OnInit, OnDestroy, AfterViewInit
   }
 
   sidebarMouseenter(e) {
-    if(this.layoutConf.sidebarStyle === 'compact') {
+    if (this.layoutConf.sidebarStyle === 'compact') {
       this.layoutConf.sidebarStyle = 'full';
       this.adminContainerClasses = this.updateAdminContainerClasses(this.layoutConf);
       this.cdr.markForCheck();

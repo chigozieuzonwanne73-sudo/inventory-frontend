@@ -1,0 +1,123 @@
+<div class="container pt-5">
+    <p-toast />
+    <div class="page-layout overflow-hidden pb-8">
+        <div class="header-bg bg-primary"></div>
+        <div class="content min-h-screen">
+            <div class="content-header flex flex-wrap justify-between items-center mb-6 gap-4" [formGroup]="filterForm">
+                <h1 class="text-2xl font-bold">Sales Reports</h1>
+
+                <!-- Filters -->
+                <div class="flex flex-wrap items-center gap-3">
+                    <!-- Date Range -->
+                    <div class="flex flex-wrap sm:flex-nowrap items-center gap-2">
+                        <mat-form-field class="w-full sm:w-36" appearance="outline" subscriptSizing="dynamic">
+                            <input matInput [matDatepicker]="pickerFrom" formControlName="dateFrom"
+                                placeholder="From Date" />
+                            <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
+                            <mat-datepicker #pickerFrom></mat-datepicker>
+                        </mat-form-field>
+
+                        <span class="hidden sm:inline text-gray-400">-</span>
+
+                        <mat-form-field class="w-auto sm:w-36" appearance="outline" subscriptSizing="dynamic">
+                            <input matInput [matDatepicker]="pickerTo" formControlName="dateTo" placeholder="To Date" />
+                            <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
+                            <mat-datepicker #pickerTo></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+
+                    <!-- Shop Dropdown -->
+                    <p-dropdown *ngIf="!isCashier" [options]="shops" styleClass="w-full sm:w-48" optionLabel="name"
+                        optionValue="id" [filter]="true" filterBy="name" [showClear]="true" placeholder="All Shops"
+                        formControlName="shopId">
+                    </p-dropdown>
+
+                    <!-- Interval Dropdown -->
+                    <p-dropdown [options]="intervalOptions" styleClass="w-full sm:w-32" optionLabel="label"
+                        optionValue="value" placeholder="Monthly" formControlName="interval">
+                    </p-dropdown>
+
+                    <button mat-flat-button color="primary" (click)="onFilterChange()" [disabled]="isLoading">
+                        <mat-icon>refresh</mat-icon>
+                        Generate
+                    </button>
+                </div>
+            </div>
+
+            <div class="content-body">
+                <!-- Summary Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6" *ngIf="reportData && !isLoading">
+                    <mat-card class="p-4">
+                        <div class="flex items-center">
+                            <mat-icon class="text-3xl text-green-600 mr-3">attach_money</mat-icon>
+                            <div>
+                                <p class="text-sm text-gray-600">Total Sales</p>
+                                <p class="text-2xl font-bold">{{ reportData.totalSales | currency:'GBP':'symbol':'1.2-2'
+                                    }}
+                                </p>
+                            </div>
+                        </div>
+                    </mat-card>
+
+                    <mat-card class="p-4">
+                        <div class="flex items-center">
+                            <mat-icon class="text-3xl text-blue-600 mr-3">receipt</mat-icon>
+                            <div>
+                                <p class="text-sm text-gray-600">Total Transactions</p>
+                                <p class="text-2xl font-bold">{{ reportData.totalTransactions }}</p>
+                            </div>
+                        </div>
+                    </mat-card>
+
+                    <mat-card class="p-4">
+                        <div class="flex items-center">
+                            <mat-icon class="text-3xl text-purple-600 mr-3">inventory</mat-icon>
+                            <div>
+                                <p class="text-sm text-gray-600">Items Sold</p>
+                                <p class="text-2xl font-bold">{{ reportData.totalItemsSold }}</p>
+                            </div>
+                        </div>
+                    </mat-card>
+                </div>
+
+                <!-- Shop Breakdown Table -->
+                <mat-card class="p-4" *ngIf="reportData && !isLoading">
+                    <h3 class="text-xl font-semibold mb-4">Shop Performance</h3>
+                    <div class="overflow-x-auto">
+                        <table mat-table [dataSource]="reportData.shopBreakdown" class="w-full">
+                            <ng-container matColumnDef="shopName">
+                                <th mat-header-cell *matHeaderCellDef>Shop Name</th>
+                                <td mat-cell *matCellDef="let shop">{{ shop.shopName }}</td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="totalSales">
+                                <th mat-header-cell *matHeaderCellDef>Total Sales</th>
+                                <td mat-cell *matCellDef="let shop">{{ shop.totalSales | currency:'GBP':'symbol':'1.2-2'
+                                    }}
+                                </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="totalTransactions">
+                                <th mat-header-cell *matHeaderCellDef>Transactions</th>
+                                <td mat-cell *matCellDef="let shop">{{ shop.totalTransactions }}</td>
+                            </ng-container>
+
+                            <tr mat-header-row *matHeaderRowDef="shopColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: shopColumns;"></tr>
+                        </table>
+                    </div>
+                </mat-card>
+
+                <!-- Loading State -->
+                <mat-card *ngIf="isLoading" class="p-4">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                        <p-skeleton height="4rem" class="mb-4"></p-skeleton>
+                        <p-skeleton height="4rem" class="mb-4"></p-skeleton>
+                        <p-skeleton height="4rem" class="mb-4"></p-skeleton>
+                    </div>
+                    <p-skeleton height="20rem"></p-skeleton>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+</div>

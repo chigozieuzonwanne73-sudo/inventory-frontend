@@ -34,7 +34,7 @@ const reusable = animation(
   }
 );
 
-export const egretAnimations = [
+export const greatAnimations = [
   trigger('animate', [transition('void => *', [useAnimation(reusable)])]),
 
   trigger('fadeInOut', [

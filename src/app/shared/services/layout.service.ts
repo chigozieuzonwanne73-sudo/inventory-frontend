@@ -13,7 +13,7 @@ export interface ILayoutConf {
   useBreadcrumb?: boolean; // Breadcrumb enabled/disabled
   breadcrumb?: string; // simple, title
   topbarFixed?: boolean; // Fixed header
-  matTheme?: string; // material theme. egret-navy, egret-navy-dark
+  matTheme?: string; // material theme. great-navy, great-navy-dark
 }
 export interface ILayoutChangeOptions {
   duration?: number;
@@ -33,7 +33,7 @@ export class LayoutService {
   layoutConf$ = this.layoutConfSubject.asObservable();
   public isMobile: boolean;
   public currentRoute: string;
-//   public fullWidthRoutes = ['shop'];
+  //   public fullWidthRoutes = ['shop'];
   public fullWidthRoutes = [];
 
   constructor(private themeService: ThemeService) {
@@ -47,10 +47,10 @@ export class LayoutService {
       sidebarStyle: 'full', // full, compact, closed
       sidebarCompactToggle: false, // if "sidebarStyle" is "compact" make it true
       dir: 'ltr', // ltr, rtl
-      useBreadcrumb: true, 
+      useBreadcrumb: true,
       topbarFixed: false,
       sidebarColor: 'sidebar-dark', // sidebar-dark, sidebar-light
-      matTheme: 'egret-navy', // egret-navy, egret-navy-dark
+      matTheme: 'great-navy', // great-navy, great-navy-dark
       breadcrumb: 'simple', // simple, title
     };
     this.publishLayoutChange(defaultLayout);

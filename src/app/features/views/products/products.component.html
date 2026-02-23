@@ -1,0 +1,140 @@
+<p-toast />
+<div class="page-layout overflow-hidden pb-8">
+    <div class="header-bg bg-primary"></div>
+    <div class="content min-h-screen">
+        <div class="content-header flex flex-wrap justify-between items-center mb-4 gap-4" [formGroup]="filterForm">
+            <div class="search-box flex items-center crnk-search-bar w-96">
+                <input class="bg-card" type="text" placeholder="Search by Name" formControlName="querySearch" />
+                <button mat-icon-button class="hover:fg-divider"><mat-icon>search</mat-icon></button>
+            </div>
+
+            <p-dropdown [options]="categories" class="w-96" optionLabel="name" optionValue="id" [filter]="true"
+                filterBy="name" [showClear]="true" placeholder="Select a Category" formControlName="categoryId">
+                <ng-template pTemplate="selectedItem" let-selectedOption>
+                    <div class="flex align-items-center gap-2">
+                        <div>{{ selectedOption.name }}</div>
+                    </div>
+                </ng-template>
+                <ng-template let-category pTemplate="item">
+                    <div class="flex align-items-center gap-2">
+                        <div>{{ category.name }}</div>
+                    </div>
+                </ng-template>
+            </p-dropdown>
+        </div>
+
+        <div class="content-body">
+            <div class="flex justify-end">
+                <span class="flex-grow"></span>
+                <button *ngIf="isCashier" mat-flat-button color="primary" class="ml-4 rtl:mr-4 rtl:ml-4 mr-4 rtl:ml-4"
+                    (click)="addProduct()">
+                    Add Product
+                </button>
+            </div>
+            <div class="">
+                <mat-card class="p-1 md:p-4 overflow-x-auto">
+                    <div class="item-table mb-6">
+                        <mat-table [dataSource]="products" class="" #table>
+
+                            <ng-container matColumnDef="Name">
+                                <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+                                <mat-cell *matCellDef="let product"> {{ product.name }} </mat-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="Category">
+                                <mat-header-cell *matHeaderCellDef> Category </mat-header-cell>
+                                <mat-cell *matCellDef="let product"> {{ product.categoryName }} </mat-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="Price">
+                                <mat-header-cell *matHeaderCellDef> Price </mat-header-cell>
+                                <mat-cell *matCellDef="let product"> {{ product.price ?? product.price | currency:'GBP'
+                                    }} </mat-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="Stock">
+                                <mat-header-cell *matHeaderCellDef> Stock </mat-header-cell>
+                                <mat-cell *matCellDef="let product"> {{ product.inventory[0]?.stockQuantity }}
+                                </mat-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="Add To Cart">
+                                <mat-header-cell *matHeaderCellDef> Add To Cart </mat-header-cell>
+                                <mat-cell *matCellDef="let product">
+                                    <button mat-icon-button color="accent" (click)="addNewInstanceToCart(product)">
+                                        <mat-icon>add_shopping_cart</mat-icon>
+                                    </button>
+                                </mat-cell>
+                            </ng-container>
+
+
+                            <ng-container matColumnDef="Edit Stock">
+                                <mat-header-cell *matHeaderCellDef>Edit Stock </mat-header-cell>
+                                <mat-cell *matCellDef="let product">
+                                    <button mat-icon-button color="accent" (click)="editStock(product)">
+                                        <mat-icon>edit</mat-icon>
+                                    </button>
+                                </mat-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="View">
+                                <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+                                <mat-cell *matCellDef="let product">
+                                    <button mat-icon-button color="primary" (click)="viewProduct(product)">
+                                        <mat-icon>visibility</mat-icon>
+                                    </button>
+                                    <button mat-icon-button color="warn" (click)="deleteProduct(product)">
+                                        <mat-icon>delete</mat-icon>
+                                    </button>
+                                </mat-cell>
+                            </ng-container>
+
+                            <div *matNoDataRow>
+                                <tr class="mat-row" *ngIf="!isLoading">
+                                    <td class="mat-cell text-center w-screen p-2"
+                                        [attr.colspan]="itemTableColumn.length">
+                                        No data available to display
+                                    </td>
+                                </tr>
+                                <ng-container *ngIf="isLoading">
+                                    <tr class="mat-row">
+                                        <td class="mat-cell text-center w-screen p-2"
+                                            [attr.colspan]="itemTableColumn.length">
+                                            <p-skeleton class="" height="2rem" />
+                                        </td>
+                                    </tr>
+                                    <tr class="mat-row">
+                                        <td class="mat-cell text-center w-screen p-2"
+                                            [attr.colspan]="itemTableColumn.length">
+                                            <p-skeleton class="" height="2rem" />
+                                        </td>
+                                    </tr>
+                                    <tr class="mat-row">
+                                        <td class="mat-cell text-center w-screen p-2"
+                                            [attr.colspan]="itemTableColumn.length">
+                                            <p-skeleton class="" height="2rem" />
+                                        </td>
+                                    </tr>
+                                    <tr class="mat-row">
+                                        <td class="mat-cell text-center w-screen p-2"
+                                            [attr.colspan]="itemTableColumn.length">
+                                            <p-skeleton class="" height="2rem" />
+                                        </td>
+                                    </tr>
+                                </ng-container>
+                            </div>
+
+                            <mat-header-row *matHeaderRowDef="itemTableColumn"></mat-header-row>
+                            <mat-row *matRowDef="let row; columns: itemTableColumn"></mat-row>
+                        </mat-table>
+
+                    </div>
+                    <mat-paginator [length]="totalProducts" [pageSize]="filterForm.get('pageSize')?.value"
+                        [pageIndex]="filterForm.get('pageNumber')?.value - 1" [pageSizeOptions]="[10, 30, 50, 100]"
+                        (page)="onPageChange($event)" aria-label="Select page of products">
+                    </mat-paginator>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+</div>
