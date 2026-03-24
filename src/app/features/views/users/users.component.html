@@ -1,0 +1,75 @@
+<p-toast />
+<div class="page-layout overflow-hidden pb-8">
+    <div class="header-bg bg-primary"></div>
+    <div class="content min-h-screen">
+        <div class="content-header flex flex-wrap justify-between items-center mb-4 gap-4">
+            <h1 class="text-2xl font-bold">Users</h1>
+        </div>
+
+        <div class="content-body">
+            <div class="">
+                <mat-card class="p-1 md:p-4 overflow-x-auto">
+                    <div class="item-table mb-6">
+                        <mat-table [dataSource]="users" class="" #table>
+
+                            <ng-container matColumnDef="Name">
+                                <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+                                <mat-cell *matCellDef="let user"> {{ user.firstName }} {{ user.lastName }} </mat-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="Email">
+                                <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
+                                <mat-cell *matCellDef="let user"> {{ user.email }} </mat-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="Role">
+                                <mat-header-cell *matHeaderCellDef> Role </mat-header-cell>
+                                <mat-cell *matCellDef="let user">
+                                    <span class="capitalize">{{ user.roles[0] }}</span>
+                                </mat-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="Shop">
+                                <mat-header-cell *matHeaderCellDef> Shop </mat-header-cell>
+                                <mat-cell *matCellDef="let user"> {{ user.shopName || 'N/A' }} </mat-cell>
+                            </ng-container>
+
+                            <div *matNoDataRow>
+                                <tr class="mat-row" *ngIf="!isLoading">
+                                    <td class="mat-cell text-center w-screen p-2"
+                                        [attr.colspan]="itemTableColumn.length">
+                                        No users available to display
+                                    </td>
+                                </tr>
+                                <ng-container *ngIf="isLoading">
+                                    <tr class="mat-row">
+                                        <td class="mat-cell text-center w-screen p-2"
+                                            [attr.colspan]="itemTableColumn.length">
+                                            <p-skeleton class="" height="2rem" />
+                                        </td>
+                                    </tr>
+                                    <tr class="mat-row">
+                                        <td class="mat-cell text-center w-screen p-2"
+                                            [attr.colspan]="itemTableColumn.length">
+                                            <p-skeleton class="" height="2rem" />
+                                        </td>
+                                    </tr>
+                                    <tr class="mat-row">
+                                        <td class="mat-cell text-center w-screen p-2"
+                                            [attr.colspan]="itemTableColumn.length">
+                                            <p-skeleton class="" height="2rem" />
+                                        </td>
+                                    </tr>
+                                </ng-container>
+                            </div>
+
+                            <mat-header-row *matHeaderRowDef="itemTableColumn"></mat-header-row>
+                            <mat-row *matRowDef="let row; columns: itemTableColumn"></mat-row>
+                        </mat-table>
+
+                    </div>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+</div>
