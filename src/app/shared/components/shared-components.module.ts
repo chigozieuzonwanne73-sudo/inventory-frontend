@@ -11,31 +11,24 @@ import { SharedDirectivesModule } from '../directives/shared-directives.module';
 import { HeaderSideComponent } from './header-side/header-side.component';
 import { SidebarSideComponent } from './sidebar-side/sidebar-side.component';
 
-// ONLY FOR DEMO
-
-// ALWAYS REQUIRED 
+// ALWAYS REQUIRED
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { FooterComponent } from './footer/footer.component';
 import { AppComfirmComponent } from '../services/app-confirm/app-confirm.component';
 import { ButtonLoadingComponent } from './button-loading/button-loading.component';
-import { EgretSidebarComponent, EgretSidebarTogglerDirective } from './egret-sidebar/egret-sidebar.component';
-import { BottomSheetShareComponent } from './bottom-sheet-share/bottom-sheet-share.component';
-import { EgretExampleViewerComponent } from './example-viewer/example-viewer.component';
-import { EgretExampleViewerTemplateComponent } from './example-viewer-template/example-viewer-template.component';
-import { EgretNotifications2Component } from './egret-notifications2/egret-notifications2.component';
+import { greatSidebarComponent, greatSidebarTogglerDirective } from './egret-sidebar/egret-sidebar.component';
+import { greatNotifications2Component } from './egret-notifications2/egret-notifications2.component';
 import { DividerComponent } from './divider/divider.component';
 import { allMaterialModules, commonMaterialModules } from '../material-imports';
 import { PerfectScrollbarModule } from './perfect-scrollbar';
+
 // Components that are NOT standalone
 const nonStandaloneComponents = [
   ButtonLoadingComponent,
-  EgretSidebarComponent,
-  EgretSidebarTogglerDirective,
-  BottomSheetShareComponent,
-  EgretExampleViewerComponent,
-  EgretExampleViewerTemplateComponent
+  greatSidebarComponent,
+  greatSidebarTogglerDirective,
 ];
 
 // Standalone components that need to be imported
@@ -45,7 +38,7 @@ const standaloneComponents = [
   SidebarSideComponent,
   HeaderSideComponent,
   AuthLayoutComponent,
-  EgretNotifications2Component,
+  greatNotifications2Component,
   FooterComponent,
   AppComfirmComponent,
   DividerComponent

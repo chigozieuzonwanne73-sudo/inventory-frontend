@@ -1,11 +1,11 @@
 import { Injectable } from "@angular/core";
-import { EgretSidebarComponent } from "./egret-sidebar.component";
+import { greatSidebarComponent } from "./great-sidebar.component";
 
 @Injectable({
   providedIn: "root"
 })
-export class EgretSidebarHelperService {
-  sidebarList: EgretSidebarComponent[];
+export class greatSidebarHelperService {
+  sidebarList: greatSidebarComponent[];
 
   constructor() {
     this.sidebarList = [];

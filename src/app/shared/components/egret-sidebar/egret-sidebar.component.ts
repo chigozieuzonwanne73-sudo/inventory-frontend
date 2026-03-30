@@ -14,15 +14,16 @@ import {
 // import { MediaObserver } from "@angular/flex-layout";
 import { Subject } from "rxjs";
 import { takeUntil } from "rxjs/operators";
-import { EgretSidebarHelperService } from "./egret-sidebar-helper.service";
+import { greatSidebarHelperService } from "./egret-sidebar-helper.service";
 import { BreakpointObserver } from "@angular/cdk/layout";
 
 @Component({
-  selector: "egret-sidebar",
+  selector: "great-sidebar",
   templateUrl: "./egret-sidebar.component.html",
   styleUrls: ["./egret-sidebar.component.scss"],
+  standalone: false
 })
-export class EgretSidebarComponent implements OnInit, OnDestroy {
+export class greatSidebarComponent implements OnInit, OnDestroy {
   // Name
   @Input()
   name: string;
@@ -52,7 +53,7 @@ export class EgretSidebarComponent implements OnInit, OnDestroy {
   constructor(
     // private matchMediaService: MatchMediaService,
     // private mediaObserver: MediaObserver,
-    private sidebarHelperService: EgretSidebarHelperService,
+    private sidebarHelperService: greatSidebarHelperService,
     private _renderer: Renderer2,
     private _elementRef: ElementRef,
     private cdr: ChangeDetectorRef,
@@ -99,7 +100,7 @@ export class EgretSidebarComponent implements OnInit, OnDestroy {
       return;
     }
     this.backdrop = this._renderer.createElement("div");
-    this.backdrop.classList.add("egret-sidebar-overlay");
+    this.backdrop.classList.add("great-sidebar-overlay");
 
     this._renderer.appendChild(
       this._elementRef.nativeElement.parentElement,
@@ -131,17 +132,17 @@ export class EgretSidebarComponent implements OnInit, OnDestroy {
 }
 
 @Directive({
-  selector: "[egretSidebarToggler]",
+  selector: "[greatSidebarToggler]",
   standalone: false
 })
-export class EgretSidebarTogglerDirective {
-  @Input("egretSidebarToggler")
+export class greatSidebarTogglerDirective {
+  @Input("greatSidebarToggler")
   public id: any;
 
-  constructor(private egretSidebarHelperService: EgretSidebarHelperService) { }
+  constructor(private greatSidebarHelperService: greatSidebarHelperService) { }
 
   @HostListener("click")
   onClick() {
-    this.egretSidebarHelperService.getSidebar(this.id).toggle();
+    this.greatSidebarHelperService.getSidebar(this.id).toggle();
   }
 }
