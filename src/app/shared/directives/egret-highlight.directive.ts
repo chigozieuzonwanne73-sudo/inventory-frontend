@@ -18,14 +18,14 @@ import { Subject } from "rxjs";
 import { takeUntil } from "rxjs/operators";
 
 @Directive({
-    host: {
-        "[class.hljs]": "true",
-        "[innerHTML]": "highlightedCode"
-    },
-    selector: "[egretHighlight]",
-    standalone: false
+  host: {
+    "[class.hljs]": "true",
+    "[innerHTML]": "highlightedCode"
+  },
+  selector: "[greatHighlight]",
+  standalone: false
 })
-export class EgretHighlightDirective implements OnInit, OnChanges, OnDestroy, AfterContentInit {
+export class greatHighlightDirective implements OnInit, OnChanges, OnDestroy, AfterContentInit {
   constructor(
     private el: ElementRef,
     private cdr: ChangeDetectorRef,
@@ -38,8 +38,8 @@ export class EgretHighlightDirective implements OnInit, OnChanges, OnDestroy, Af
   highlightedCode: string = '';
 
   @Input() path: string = '';
-  
-  @Input("egretHighlight") code: string = '';
+
+  @Input("greatHighlight") code: string = '';
   private unsubscribeAll: Subject<any>;
   @Input() languages: string[] = [];
   private originalContent: string = '';
@@ -74,8 +74,8 @@ export class EgretHighlightDirective implements OnInit, OnChanges, OnDestroy, Af
   }
 
   ngOnDestroy() {
-      this.unsubscribeAll.next(1);
-      this.unsubscribeAll.complete();
+    this.unsubscribeAll.next(1);
+    this.unsubscribeAll.complete();
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -86,7 +86,7 @@ export class EgretHighlightDirective implements OnInit, OnChanges, OnDestroy, Af
     ) {
       this.highlightElement(this.code);
     } else if (
-      changes["code"] && 
+      changes["code"] &&
       !changes["code"].currentValue &&
       this.originalContent
     ) {

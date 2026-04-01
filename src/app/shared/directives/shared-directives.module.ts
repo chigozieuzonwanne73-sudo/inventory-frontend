@@ -7,9 +7,9 @@ import { ScrollToDirective } from './scroll-to.directive';
 import { AppDropdownDirective } from './dropdown.directive';
 import { DropdownAnchorDirective } from './dropdown-anchor.directive';
 import { DropdownLinkDirective } from './dropdown-link.directive';
-import { EgretSideNavToggleDirective } from './egret-side-nav-toggle.directive';
-import { EgretSidenavHelperDirective, EgretSidenavTogglerDirective } from './egret-sidenav-helper/egret-sidenav-helper.directive';
-import { EgretHighlightDirective } from './egret-highlight.directive';
+import { greatSideNavToggleDirective } from './egret-side-nav-toggle.directive';
+import { greatSidenavHelperDirective, greatSidenavTogglerDirective } from './egret-sidenav-helper/egret-sidenav-helper.directive';
+import { greatHighlightDirective } from './egret-highlight.directive';
 import { AutoFocusDirective } from './auto-focus.directive';
 
 // Standalone directives that need to be imported
@@ -23,10 +23,10 @@ const standaloneDirectives = [
 const nonStandaloneDirectives = [
   AutoFocusDirective,
   FontSizeDirective,
-  EgretSideNavToggleDirective,
-  EgretSidenavHelperDirective,
-  EgretSidenavTogglerDirective,
-  EgretHighlightDirective
+  greatSideNavToggleDirective,
+  greatSidenavHelperDirective,
+  greatSidenavTogglerDirective,
+  greatHighlightDirective
 ];
 
 @NgModule({

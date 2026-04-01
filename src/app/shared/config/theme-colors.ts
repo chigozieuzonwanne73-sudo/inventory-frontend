@@ -11,10 +11,10 @@ export interface ThemeConfig {
 
 // Theme IDs used for referencing themes
 export const THEME_IDS = {
-  NAVY_LIGHT: 'egret-navy',
-  NAVY_DARK: 'egret-navy-dark',
-  // GREEN_LIGHT: 'egret-green',
-  // GREEN_DARK: 'egret-green-dark',
+  NAVY_LIGHT: 'great-navy',
+  NAVY_DARK: 'great-navy-dark',
+  // GREEN_LIGHT: 'great-green',
+  // GREEN_DARK: 'great-green-dark',
   // INDIGO_PINK_LIGHT: 'indigo-pink',
   // INDIGO_PINK_DARK: 'indigo-pink-dark'
 } as const;

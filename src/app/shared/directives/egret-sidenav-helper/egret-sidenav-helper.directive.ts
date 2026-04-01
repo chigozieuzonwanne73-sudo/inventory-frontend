@@ -9,19 +9,19 @@ import {
 // import { takeUntil } from "rxjs/operators";
 import { Subject } from "rxjs";
 // import { MatchMediaService } from "app/shared/services/match-media.service";
-import { EgretSidenavHelperService } from "./egret-sidenav-helper.service";
+import { greatSidenavHelperService } from "./egret-sidenav-helper.service";
 import { MatSidenav } from "@angular/material/sidenav";
 // import { MediaObserver } from "@angular/flex-layout";
 
 @Directive({
-    selector: "[egretSidenavHelper]",
-    standalone: false
+  selector: "[greatSidenavHelper]",
+  standalone: false
 })
-export class EgretSidenavHelperDirective implements OnInit, OnDestroy {
+export class greatSidenavHelperDirective implements OnInit, OnDestroy {
   @HostBinding("class.is-open")
   isOpen: boolean;
 
-  @Input("egretSidenavHelper")
+  @Input("greatSidenavHelper")
   id: string;
 
   @Input("isOpen")
@@ -31,7 +31,7 @@ export class EgretSidenavHelperDirective implements OnInit, OnDestroy {
 
   constructor(
     // private matchMediaService: MatchMediaService,
-    private egretSidenavHelperService: EgretSidenavHelperService,
+    private greatSidenavHelperService: greatSidenavHelperService,
     private matSidenav: MatSidenav,
     // private mediaObserver: MediaObserver
   ) {
@@ -42,7 +42,7 @@ export class EgretSidenavHelperDirective implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.egretSidenavHelperService.setSidenav(this.id, this.matSidenav);
+    this.greatSidenavHelperService.setSidenav(this.id, this.matSidenav);
 
     // if (this.mediaObserver.isActive(this.isOpenBreakpoint)) {
     //   this.isOpen = true;
@@ -76,18 +76,18 @@ export class EgretSidenavHelperDirective implements OnInit, OnDestroy {
 }
 
 @Directive({
-    selector: "[egretSidenavToggler]",
-    standalone: false
+  selector: "[greatSidenavToggler]",
+  standalone: false
 })
-export class EgretSidenavTogglerDirective {
-  @Input("egretSidenavToggler")
+export class greatSidenavTogglerDirective {
+  @Input("greatSidenavToggler")
   public id: any;
 
-  constructor(private egretSidenavHelperService: EgretSidenavHelperService) {}
+  constructor(private greatSidenavHelperService: greatSidenavHelperService) { }
 
   @HostListener("click")
   onClick() {
-    // console.log(this.egretSidenavHelperService.getSidenav(this.id))
-    this.egretSidenavHelperService.getSidenav(this.id).toggle();
+    // console.log(this.greatSidenavHelperService.getSidenav(this.id))
+    this.greatSidenavHelperService.getSidenav(this.id).toggle();
   }
 }

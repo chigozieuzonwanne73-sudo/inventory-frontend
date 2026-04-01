@@ -5,10 +5,10 @@ import { MatSidenav } from '@angular/material/sidenav';
 
 
 @Directive({
-    selector: '[EgretSideNavToggle]',
-    standalone: false
+  selector: '[greatSideNavToggle]',
+  standalone: false
 })
-export class EgretSideNavToggleDirective implements OnInit, OnDestroy {
+export class greatSideNavToggleDirective implements OnInit, OnDestroy {
   isMobile;
   screenSizeWatcher: Subscription;
   constructor(
@@ -22,7 +22,7 @@ export class EgretSideNavToggleDirective implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    if(this.screenSizeWatcher) {
+    if (this.screenSizeWatcher) {
       this.screenSizeWatcher.unsubscribe()
     }
   }
