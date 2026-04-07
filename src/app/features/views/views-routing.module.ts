@@ -1,59 +1,107 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LookupHistoryComponent } from './lookup-history/lookup-history.component';
-import { SettingsComponent } from './settings/settings.component';
-import { AssistantComponent } from './assistant/assistant.component';
-import { VehicleListComponent } from './vehicle-lookup/vehicle-list/vehicle-list.component';
-import { VehicleDetailsComponent } from './vehicle-lookup/vehicle-details/vehicle-details.component';
-import { SubscriptionComponent } from './subscription/subscription/subscription.component';
 
 const routes: Routes = [
+  // OWNER ROUTES
   {
-    path: 'lookup-history',
-    component: LookupHistoryComponent,  
-    data: { title: 'Lookup History'  }  
+    path: 'owner',
+    children: [
+      {
+        path: 'dashboard',
+        loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule),
+        data: { title: 'Dashboard', role: 'owner' }
+      },
+      {
+        path: 'transactions',
+        loadChildren: () => import('./transactions/transactions.module').then(m => m.TransactionsModule),
+        data: { title: 'Transactions' }
+      },
+      {
+        path: 'checkout',
+        loadChildren: () => import('./checkout/checkout.module').then(m => m.CheckoutModule),
+        data: { title: 'Checkout Monitor' }
+      },
+      {
+        path: 'products',
+        loadChildren: () => import('./products/products.module').then(m => m.ProductsModule),
+        data: { title: 'Products' }
+      },
+      {
+        path: 'shops',
+        loadChildren: () => import('./shops/shops.module').then(m => m.ShopsModule),
+        data: { title: 'Shops' }
+      },
+      {
+        path: 'users',
+        loadChildren: () => import('./users/users.module').then(m => m.UsersModule),
+        data: { title: 'Users' }
+      },
+      {
+        path: 'reports',
+        loadChildren: () => import('./reports/reports.module').then(m => m.ReportsModule),
+        data: { title: 'Reports' }
+      },
+      {
+        path: 'settings',
+        loadChildren: () => import('./settings/settings.module').then(m => m.SettingsModule),
+        data: { title: 'Settings' }
+      },
+      {
+        path: '',
+        redirectTo: 'reports',
+        pathMatch: 'full'
+      }
+    ]
   },
-  {
-    path: 'settings',
-    component: SettingsComponent,
-    loadChildren: () => import('./settings/settings.module').then(m => m.SettingsModule),
-    data: { title: 'Settings' }    
-  },
-  {
-    path: 'lot',
-    component: VehicleListComponent,
-    data: { title: 'My Lot', view: 'Lot' }
-  },
-  {
-    path: 'marketplace',
-    component: VehicleListComponent,
-    data: { title: 'Marketplace', view: 'Marketplace' }
 
-  },
+  // CASHIER ROUTES
   {
-    path: 'marketplace/:id',
-    component: VehicleDetailsComponent
+    path: 'cashier',
+    children: [
+      {
+        path: 'dashboard',
+        loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule),
+        data: { title: 'Dashboard', role: 'cashier' }
+      },
+      {
+        path: 'pos',
+        loadChildren: () => import('./pos/pos.module').then(m => m.PosModule),
+        data: { title: 'Point of Sale' }
+      },
+      {
+        path: 'transactions',
+        loadChildren: () => import('./transactions/transactions.module').then(m => m.TransactionsModule),
+        data: { title: 'My Transactions', role: 'cashier' }
+      },
+      {
+        path: 'products',
+        loadChildren: () => import('./products/products.module').then(m => m.ProductsModule),
+        data: { title: 'Products', role: 'cashier' }
+      },
+      {
+        path: 'shop',
+        loadChildren: () => import('./shops/shops.module').then(m => m.ShopsModule),
+        data: { title: 'My Shop', role: 'cashier' }
+      },
+      {
+        path: 'settings',
+        loadChildren: () => import('./settings/settings.module').then(m => m.SettingsModule),
+        data: { title: 'Settings' }
+      },
+      {
+        path: '',
+        redirectTo: 'pos',
+        pathMatch: 'full'
+      }
+    ]
   },
- 
+
+  // DEFAULT REDIRECT
   {
-    path: 'lot/:id',
-    component: VehicleDetailsComponent
-  },
-  {
-    path: 'subscription',
-    component: SubscriptionComponent
-  },
-  
-  {
-    path: 'assistant',
-    loadChildren: () => import('./assistant/assistant.module').then(m => m.AssistantModule),
-  },
-  {
-    path: 'vehicle-lookup',
-    loadChildren: () => import('./vehicle-lookup/vehicle-lookup.module').then(m => m.VehicleLookupModule),
-    data: { title: 'Lookup' }    
-  },
-  
+    path: '',
+    redirectTo: 'auth/signin',
+    pathMatch: 'full'
+  }
 ];
 
 @NgModule({

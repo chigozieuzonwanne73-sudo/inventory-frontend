@@ -10,6 +10,7 @@
   z-index: 999999;
   opacity: 1;
   transition: left 0.3s, opacity 0.1s;
+
   span {
     position: absolute;
     left: 1px;
@@ -21,8 +22,10 @@
     background: #666;
     transition: all $sidebarTrnTime $transitionTiming;
   }
+
   &.active {
     background: #444;
+
     span {
       left: 13px;
       background: #ffffff;
@@ -44,9 +47,10 @@
   color: #444;
   transition: all $sidebarTrnTime $transitionTiming;
   overflow: hidden;
+
   .app-logo {
     width: auto;
-    height: 32px;
+    height: 322px;
     margin-right: 8px;
   }
 
@@ -56,6 +60,7 @@
   text-align: center;
   width: 100%;
   padding: 1rem 0;
+
   .app-user-photo {
     width: 72px;
     margin: 0 auto 8px;
@@ -64,16 +69,19 @@
     padding: 4px;
     border-radius: 50%;
   }
+
   .app-user-controls {
     .mat-icon-button {
       margin: 0 2px;
     }
   }
+
   img {
     width: 100%;
     height: 100%;
     border-radius: 50%;
   }
+
   .app-user-name {
     display: block;
     font-size: 0.875rem;
@@ -86,21 +94,26 @@
     opacity: 0;
     left: -2rem;
   }
+
   .branding {
     width: $compact-sidebar-width;
     padding: 0;
+
     .app-logo {
       margin: auto;
     }
   }
+
   .app-user {
-      padding: .5rem 0;
+    padding: .5rem 0;
+
     .app-user-photo {
-        width: 40px;
-        height: 40px;
-        margin-bottom: 0;
+      width: 40px;
+      height: 40px;
+      margin-bottom: 0;
     }
   }
+
   .app-user-name,
   .app-user-controls {
     display: none !important;
@@ -108,6 +121,7 @@
 }
 
 [dir="rtl"] {
+
   // .sidebar-compact-switch {
   //   left: auto;
   //   right: 12rem;
@@ -115,10 +129,12 @@
   .app-admin-container.sidebar-compact .sidebar-hold {
     overflow: hidden;
   }
+
   .branding {
     top: 0;
     left: auto !important;
     right: 0;
+
     .app-logo {
       margin-right: 0;
       margin-left: 8px;

@@ -47,7 +47,7 @@
 
 // Generate all color variants for each theme
 // Default Light Theme (Navy)
-.egret-navy {
+.great-navy {
 
     // Set semantic colors from light theme
     @each $key, $value in colors.$light-theme-colors {
@@ -62,7 +62,7 @@
 }
 
 // Default Dark Theme (Navy Dark)
-.egret-navy-dark {
+.great-navy-dark {
 
     // Dark theme semantic colors
     @each $key, $value in colors.$dark-theme-colors {

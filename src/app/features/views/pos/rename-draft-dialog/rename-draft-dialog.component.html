@@ -1,0 +1,29 @@
+<h2 mat-dialog-title class="flex items-center gap-2">
+    <mat-icon class="text-primary-500">edit</mat-icon>
+    Rename Draft
+</h2>
+
+<mat-dialog-content>
+    <form [formGroup]="form">
+        <mat-form-field class="w-full" appearance="outline">
+            <mat-label>Draft Name</mat-label>
+            <input matInput formControlName="draftName" placeholder="Enter a new name for this draft" autocomplete="off"
+                (keydown.enter)="onSave()">
+            <mat-icon matSuffix>description</mat-icon>
+            <mat-error *ngIf="form.get('draftName')?.hasError('required')">
+                Draft name is required
+            </mat-error>
+            <mat-error *ngIf="form.get('draftName')?.hasError('maxlength')">
+                Draft name must be less than 100 characters
+            </mat-error>
+        </mat-form-field>
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-button (click)="onCancel()">Cancel</button>
+    <button mat-flat-button color="primary" (click)="onSave()" [disabled]="form.invalid">
+        <mat-icon class="mr-1">save</mat-icon>
+        Save
+    </button>
+</mat-dialog-actions>

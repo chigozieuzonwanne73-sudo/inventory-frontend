@@ -1,0 +1,33 @@
+<h2 mat-dialog-title class="flex items-center gap-2">
+    <mat-icon class="text-primary-500">save</mat-icon>
+    Save Cart as Draft
+</h2>
+
+<mat-dialog-content>
+    <p class="text-secondary mb-4">
+        Save your current cart as a draft so you can continue later.
+    </p>
+
+    <form [formGroup]="form">
+        <mat-label>Draft Name</mat-label>
+        <mat-form-field class="w-full" appearance="outline">
+            <input matInput formControlName="draftName" placeholder="Enter a name for this draft" autocomplete="off"
+                (keydown.enter)="onSave()">
+            <mat-icon matSuffix>description</mat-icon>
+            <mat-error *ngIf="form.get('draftName')?.hasError('required')">
+                Draft name is required
+            </mat-error>
+            <mat-error *ngIf="form.get('draftName')?.hasError('maxlength')">
+                Draft name must be less than 100 characters
+            </mat-error>
+        </mat-form-field>
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-button (click)="onCancel()">Cancel</button>
+    <button mat-flat-button color="primary" (click)="onSave()" [disabled]="form.invalid">
+        <mat-icon class="mr-1">save</mat-icon>
+        Save Draft
+    </button>
+</mat-dialog-actions>

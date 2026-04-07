@@ -15,7 +15,7 @@
 
 // Define typography using the centralized font variables from _variables.scss
 // This ensures that Angular Material uses the same font family as the rest of the app
-$egret-typography: mat.m2-define-typography-config(
+$great-typography: mat.m2-define-typography-config(
     $font-family: $font-family-base,
     $headline-1: mat.m2-define-typography-level(1.875rem, 2.25rem, 800, $font-family-base),
     $headline-2: mat.m2-define-typography-level(1.25rem, 1.75rem, 700, $font-family-base),
@@ -35,10 +35,10 @@ $egret-typography: mat.m2-define-typography-config(
 /* Create style without colors */
 @include mat.all-component-themes((color: null,
     density: 0,
-    typography: $egret-typography,
+    typography: $great-typography,
   ));
 
-@include mat.typography-hierarchy($egret-typography);
+@include mat.typography-hierarchy($great-typography);
 
 // Define static colors for Material theme generation from our centralized color tokens
 // These are used internally by Angular Material, but will be overridden by CSS variables at runtime
@@ -215,7 +215,7 @@ $default-dark-theme-accent: mat.m2-define-palette($static-accent-dark-palette);
 $default-dark-theme-warn: mat.m2-define-palette($static-warn-dark-palette);
 
 /* Create Light theme */
-.egret-navy {  
+.great-navy {  
   // Background colors - static values for SCSS compilation
   $light-background: #fafafa;
   $light-bg-darker-5: color.adjust($light-background, $lightness: -5%);
@@ -272,7 +272,7 @@ $default-dark-theme-warn: mat.m2-define-palette($static-warn-dark-palette);
 }
 
 /* Create Dark theme */
-.egret-navy-dark {
+.great-navy-dark {
   // Foreground Elements - static values for SCSS compilation
   $light-text: rgba(255, 255, 255, 0.87);
   $light-accent-text: rgba(255, 255, 255, 0.54);

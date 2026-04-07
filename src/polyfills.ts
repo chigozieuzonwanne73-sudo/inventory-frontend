@@ -45,7 +45,7 @@ import 'zone.js';  // Included with Angular CLI.
 // Page loader
 // import './vendor/pace/pace.min.js';
 // // Charts
-import './vendor/Chart.min.js';
+// import './vendor/Chart.min.js';
 // // User tour
 // // Rich Text Editor
 // import 'quill';

@@ -1,0 +1,59 @@
+<p-toast position="top-right" />
+
+
+<mat-dialog-content>
+    <div class="container">
+
+        <!-- View Mode - Show category details when editing existing category -->
+        <!-- Edit/Add Mode -->
+        <mat-card *ngIf="showEditOption || !isEditMode" class="p-4">
+            <div class="flex mb-4">
+                <h4 class="flex-grow">{{ isEditMode ? 'Edit Category Details' : 'Add New Category' }}</h4>
+
+                <button mat-flat-button color="primary" class="ml-4 rtl:mr-4 rtl:ml-4 mr-4 rtl:ml-4"
+                    [disabled]="categoryForm.invalid || isLoading" (click)="onSubmit()">
+                    {{ isLoading ? 'Saving...' : 'Save' }}
+                </button>
+
+                <!-- Cancel button only shows in edit mode -->
+                <button *ngIf="isEditMode" mat-flat-button color="accent" (click)="onCancel()">
+                    Cancel
+                </button>
+
+                <!-- Close button only shows in add mode -->
+                <button *ngIf="!isEditMode" mat-flat-button color="accent" (click)="closeDialog()">
+                    Close
+                </button>
+            </div>
+
+            <form [formGroup]="categoryForm">
+                <!-- billing details -->
+                <div class="billing-address flex flex-wrap justify-between items-center">
+                    <!-- category form -->
+                    <div class="flex flex-col w-full">
+                        <mat-form-field class="mb-5">
+                            <mat-label>Name</mat-label>
+                            <input formControlName="name" matInput required placeholder="Category Name" />
+                            <mat-error *ngIf="categoryForm.controls['name'].hasError('required')">
+                                Name is required
+                            </mat-error>
+                            <mat-error *ngIf="categoryForm.controls['name'].hasError('minlength')">
+                                Name must be at least
+                                {{categoryForm.controls['name'].errors?.['minlength']?.requiredLength}} characters
+                            </mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field class="mb-5">
+                            <mat-label>Description</mat-label>
+                            <textarea formControlName="description" matInput required matTextareaAutosize
+                                placeholder="Category Description"></textarea>
+                            <mat-error *ngIf="categoryForm.controls['description'].hasError('required')">
+                                Description is required
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </form>
+        </mat-card>
+    </div>
+</mat-dialog-content>

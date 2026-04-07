@@ -1,0 +1,60 @@
+<div class="page-layout overflow-hidden pb-8">
+    <div class="header-bg bg-primary"></div>
+    <div class="content min-h-screen">
+        <div class="content-header flex flex-wrap justify-between items-center mb-4 gap-4">
+            <h1 class="text-3xl font-bold">Reports & Analytics</h1>
+        </div>
+
+        <div class="content-body">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Sales Reports Card -->
+                <mat-card class="p-6 hover:shadow-lg transition-shadow cursor-pointer"
+                    routerLink="/owner/reports/sales">
+                    <div class="flex items-center mb-4">
+                        <mat-icon class="text-4xl text-primary mr-4">analytics</mat-icon>
+                        <div>
+                            <h3 class="text-xl font-semibold">Sales Reports</h3>
+                            <p class="text-gray-600">Overall sales performance and trends</p>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm text-gray-500">View detailed sales analytics</span>
+                        <mat-icon class="text-primary">arrow_forward</mat-icon>
+                    </div>
+                </mat-card>
+
+                <!-- Product Performance Card -->
+                <mat-card class="p-6 hover:shadow-lg transition-shadow cursor-pointer"
+                    routerLink="/owner/reports/products">
+                    <div class="flex items-center mb-4">
+                        <mat-icon class="text-4xl text-green-600 mr-4">inventory</mat-icon>
+                        <div>
+                            <h3 class="text-xl font-semibold">Product Performance</h3>
+                            <p class="text-gray-600">Top selling products and revenue</p>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm text-gray-500">Analyze product performance</span>
+                        <mat-icon class="text-green-600">arrow_forward</mat-icon>
+                    </div>
+                </mat-card>
+
+                <!-- Monthly Breakdown Card -->
+                <mat-card class="p-6 hover:shadow-lg transition-shadow cursor-pointer"
+                    routerLink="/owner/reports/monthly">
+                    <div class="flex items-center mb-4">
+                        <mat-icon class="text-4xl text-blue-600 mr-4">calendar_view_month</mat-icon>
+                        <div>
+                            <h3 class="text-xl font-semibold">Monthly Breakdown</h3>
+                            <p class="text-gray-600">Sales trends by time period</p>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm text-gray-500">View period-based analytics</span>
+                        <mat-icon class="text-blue-600">arrow_forward</mat-icon>
+                    </div>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+</div>

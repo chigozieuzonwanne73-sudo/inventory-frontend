@@ -4,7 +4,7 @@ module.exports = {
     "./src/**/*.{html,ts}",
   ],
   // Support for dark mode 
-  darkMode: ['class', '.egret-navy-dark'],
+  darkMode: ['class', '.great-navy-dark'],
   theme: {
     extend: {
       colors: {
@@ -60,7 +60,7 @@ module.exports = {
         '10/12': '83.333333%',
         '11/12': '91.666667%',
       },
-      // Customized font families to match Egret
+      // Customized font families to match great
       fontFamily: {
         sans: ['var(--font-family-base)'],
         mono: ['var(--font-family-mono)'],

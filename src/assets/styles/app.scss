@@ -1,6 +1,6 @@
 /*
  *
- *   EGRET - Angular Material Design Admin Template
+ *   great - Angular Material Design Admin Template
  *
  *
 */
@@ -14,7 +14,7 @@
 @use 'quill/dist/quill.snow.css' as *;
 @use 'driver.js/dist/driver.css';
 @use 'highlight.js/styles/github.css';
-@use '../../vendor/pace/pace-theme-min.css';
+// @use '../../vendor/pace/pace-theme-min.css';
 
 @use 'angular-calendar/scss/angular-calendar.scss';
 @use "scss/mixins/mixins" as *;
