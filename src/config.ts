@@ -1,6 +1,6 @@
 export const config = {
   // apiUrl: 'http://localhost:5086',
-  apiUrl: 'http://199.231.187.253',
+  apiUrl: 'https://inventory-backend.duckdns.org',
 
   themeLocalStorageKey: 'great-theme-id',
   authRoles: {
