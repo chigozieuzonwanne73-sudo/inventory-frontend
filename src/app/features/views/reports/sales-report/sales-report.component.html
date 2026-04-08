@@ -7,41 +7,7 @@
                 <h1 class="text-2xl font-bold">Sales Reports</h1>
 
                 <!-- Filters -->
-                <div class="flex flex-wrap items-center gap-3">
-                    <!-- Date Range -->
-                    <div class="flex flex-wrap sm:flex-nowrap items-center gap-2">
-                        <mat-form-field class="w-full sm:w-36" appearance="outline" subscriptSizing="dynamic">
-                            <input matInput [matDatepicker]="pickerFrom" formControlName="dateFrom"
-                                placeholder="From Date" />
-                            <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
-                            <mat-datepicker #pickerFrom></mat-datepicker>
-                        </mat-form-field>
 
-                        <span class="hidden sm:inline text-gray-400">-</span>
-
-                        <mat-form-field class="w-auto sm:w-36" appearance="outline" subscriptSizing="dynamic">
-                            <input matInput [matDatepicker]="pickerTo" formControlName="dateTo" placeholder="To Date" />
-                            <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
-                            <mat-datepicker #pickerTo></mat-datepicker>
-                        </mat-form-field>
-                    </div>
-
-                    <!-- Shop Dropdown -->
-                    <p-dropdown *ngIf="!isCashier" [options]="shops" styleClass="w-full sm:w-48" optionLabel="name"
-                        optionValue="id" [filter]="true" filterBy="name" [showClear]="true" placeholder="All Shops"
-                        formControlName="shopId">
-                    </p-dropdown>
-
-                    <!-- Interval Dropdown -->
-                    <p-dropdown [options]="intervalOptions" styleClass="w-full sm:w-32" optionLabel="label"
-                        optionValue="value" placeholder="Monthly" formControlName="interval">
-                    </p-dropdown>
-
-                    <button mat-flat-button color="primary" (click)="onFilterChange()" [disabled]="isLoading">
-                        <mat-icon>refresh</mat-icon>
-                        Generate
-                    </button>
-                </div>
             </div>
 
             <div class="content-body">
