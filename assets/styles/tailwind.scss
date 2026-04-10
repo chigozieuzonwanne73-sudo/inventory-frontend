@@ -1,0 +1,167 @@
+// Import Tailwind 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+// Custom Tailwind layer with additional utility classes that
+// complement Angular Material but using the same CSS variables
+
+@layer utilities {
+
+  // Background color utilities that match Material theme
+  .bg-base {
+    background-color: rgb(var(--bg-base));
+  }
+
+  .bg-card {
+    background-color: rgb(var(--bg-card));
+  }
+
+  .bg-hover {
+    background-color: rgba(var(--bg-hover));
+  }
+
+  .bg-dialog {
+    background-color: rgb(var(--bg-dialog));
+  }
+
+  .bg-divider {
+    background-color: rgba(var(--fg-divider));
+  }
+
+  .mat-bg-primary,
+  .bg-primary {
+    background-color: rgb(var(--color-primary));
+  }
+
+  .mat-bg-accent,
+  .bg-accent {
+    background-color: rgb(var(--color-accent));
+  }
+
+  .mat-bg-warn,
+  .bg-warn {
+    background-color: rgb(var(--color-warn));
+  }
+
+  .mat-bg-success,
+  .bg-success {
+    background-color: rgb(var(--color-success));
+  }
+
+  .search-box {
+    overflow: hidden;
+    vertical-align: middle;
+
+    .mat-icon-button {
+      margin-left: 8px;
+    }
+
+    input[type="text"] {
+      width: calc(100% - 52px);
+      padding: 12px 20px;
+      border: none;
+      outline: none;
+      font-size: 18px;
+      box-sizing: border-box;
+    }
+  }
+
+  .mat-bg-info,
+  .bg-info {
+    background-color: rgb(var(--color-info));
+  }
+
+  // Text color utilities that match Material theme
+  .text-base {
+    color: rgba(var(--fg-base));
+  }
+
+  .text-hint {
+    color: rgba(var(--fg-hint));
+  }
+
+  // Border color utilities
+  .border-divider {
+    border-color: rgba(var(--fg-divider));
+  }
+
+  .mat-text-primary,
+  .text-primary {
+    color: rgb(var(--color-primary));
+  }
+
+  .mat-text-success,
+  .text-success {
+    color: rgba(var(--color-success));
+  }
+
+  .mat-text-accent,
+  .text-accent {
+    color: rgb(var(--color-accent));
+  }
+
+  .mat-text-warn,
+  .text-warn {
+    color: rgb(var(--color-warn));
+  }
+
+  .mat-text-info,
+  .text-info {
+    color: rgb(var(--color-info));
+  }
+
+  // gradient
+  .screen-bottom-left-gradient {
+    position: relative;
+
+    &::before {
+      content: '';
+      position: fixed;
+      left: -25%;
+      bottom: -25%;
+      width: 60%;
+      height: 60%;
+      background: radial-gradient(circle,
+          rgba(9, 43, 85, 0.8) 0%,
+          /* #092b55 at high opacity */
+          rgba(59, 130, 246, 0.4) 25%,
+          /* Soft blue */
+          rgba(16, 185, 129, 0.2) 50%,
+          /* Teal */
+          rgba(255, 255, 255, 0) 80%
+          /* Transparent fade-out */
+        );
+
+      border-radius: 50%;
+      filter: blur(60px);
+      z-index: 0;
+    }
+  }
+
+  .screen-bottom-right-gradient {
+    position: relative;
+
+    &::after {
+      content: '';
+      position: fixed;
+      top: -25%;
+      /* Move it to the top */
+      right: -25%;
+      /* Move it to the right */
+      width: 60%;
+      height: 60%;
+      background: radial-gradient(circle,
+          rgba(0, 87, 255, 0.1) 0%,
+          /* Soft blue */
+          rgba(186, 137, 255, 0.2) 50%,
+          /* Light purple */
+          rgba(44, 178, 207, 0.1) 70%
+          /* Soft cyan */
+        );
+      border-radius: 50%;
+      filter: blur(40px);
+      z-index: 0;
+    }
+  }
+}
