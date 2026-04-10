@@ -48,7 +48,7 @@
 ### 1 — Clone the repository
 
 ```bash
-git clone https://github.com/okahgreat199-svg/inventory-frontend.git
+git clone https://github.com/chigozieuzonwanne73-sudo/inventory-frontend.git
 cd shopana-inventory-frontend
 ```
 
@@ -236,7 +236,7 @@ dist/browser/
 
 ```bash
 npm install angular-cli-ghpages --save-dev
-ng build --base-href="https://okahgreat199-svg.github.io/inventory-frontend/"
+ng build --base-href="https://chigozieuzonwanne73-sudo.github.io/inventory-frontend/"
 npx angular-cli-ghpages --dir=dist/browser
 ```
 
@@ -268,54 +268,9 @@ Browser
   └── GitHub Pages (Angular frontend, HTTPS)
         └── DuckDNS domain → Interserver VPS
               └── Certbot/Let's Encrypt TLS
-                    └── Node.js/Express backend (HTTPS)
+                    └── .NET backend (HTTPS)
 ```
 
----
 
-## API Integration
-
-The frontend expects a Node.js/Express backend. Edit `src/environments/environment.ts` to point `apiUrl` at your instance.
-
-### Auth
-
-```
-POST  /api/auth/register
-POST  /api/auth/login
-POST  /api/auth/refresh
-POST  /api/auth/forgot-password
-POST  /api/auth/reset-password
-```
-
-### Products & categories
-
-```
-GET    /api/products
-POST   /api/products
-GET    /api/products/:id
-PATCH  /api/products/:id
-DELETE /api/products/:id
-GET    /api/categories
-```
-
-### Sales
-
-```
-POST  /api/sales
-GET   /api/sales
-GET   /api/sales/:id
-GET   /api/sales/receipt/:id
-```
-
-### Reports
-
-```
-GET   /api/reports/sales
-GET   /api/reports/inventory
-GET   /api/reports/customer
-POST  /api/reports/export
-```
-
----
 
 *Last updated: April 2026 · github.com/okahgreat199-svg/inventory-frontend*
